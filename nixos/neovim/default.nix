@@ -183,7 +183,6 @@ in
         ignoreCollisions = true;
       };
       buildEnv = [
-        "SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so"
         "CPLUS_INCLUDE_PATH=${config.home.profileDirectory}/lib/nvim-depends/include/c++/v1"
         "PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-depends/pkgconfig"
         "CPATH=${config.home.profileDirectory}/lib/nvim-depends/include"
@@ -198,9 +197,11 @@ in
           "nvim/lua".source = ../../lua;
           "nvim/init.lua".source = ../../init.lua;
         };
-        home.packages = optionals cfg.setBuildEnv [ nvim-depends-library nvim-depends-include nvim-depends-pkgconfig ];
+        home.packages = [
+          ripgrep
+        ] ++ optionals cfg.setBuildEnv [ nvim-depends-library nvim-depends-include nvim-depends-pkgconfig ];
         home.extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
-        home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " " + "nvim";
+        home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so " + "nvim";
 
         programs.java.enable = cfg.withJava;
         programs.dotnet.dev.enable = cfg.withDotNET;
@@ -219,10 +220,7 @@ in
             [
               # Dependent packages used by default plugins
               doq
-              neovim-remote
-              ripgrep
               sqlite
-              xclip
 
               yarn
             ]
