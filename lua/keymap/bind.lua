@@ -147,6 +147,26 @@ function bind.escape_termcode(cmd_string)
 	return vim.api.nvim_replace_termcodes(cmd_string, true, true, true)
 end
 
+---@param name string
+---@param orig table
+---@param sub_name? string
+function bind.override_mapping(name, orig, sub_name)
+	local ok, custom = pcall(require, "user.keymap." .. name)
+	custom = sub_name and custom.sub_name or custom
+	if ok then
+		if type(custom) == "table" then
+			orig = vim.tbl_extend("force", orig, custom)
+		elseif type(custom) == "function" then
+			orig = custom()
+		else
+			error(
+				"Please return `nil` if you disable plugin or `table` if you override keymap or `function` if you replace keymap completely "
+			)
+		end
+	end
+	return orig
+end
+
 ---@param mapping table<string, map_rhs>
 function bind.nvim_load_mapping(mapping)
 	for key, value in pairs(mapping) do
