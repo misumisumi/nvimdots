@@ -23,6 +23,7 @@ local plug_map = {
 	["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent():with_desc("buffer: Goto buffer 9"),
 }
 
+plug_map = bind.override_mapping("ui", plug_map, "plug_map")
 bind.nvim_load_mapping(plug_map)
 
 local mapping = {}
@@ -99,6 +100,7 @@ function mapping.gitsigns(buf)
 			actions.text_object()
 		end):with_buffer(buf),
 	}
+	map = bind.override_mapping("ui", plug_map, "gitsigns")
 	bind.nvim_load_mapping(map)
 end
 

@@ -19,6 +19,7 @@ local plug_map = {
 	["n|<leader>px"] = map_cr("Lazy clean"):with_silent():with_noremap():with_nowait():with_desc("package: Clean"),
 }
 
+plug_map = bind.override_mapping("init", plug_map)
 bind.nvim_load_mapping(plug_map)
 
 -- Plugin keymaps
@@ -27,3 +28,5 @@ require("keymap.editor")
 require("keymap.lang")
 require("keymap.tool")
 require("keymap.ui")
+
+local ok, _ = pcall(require, "user.keymap")
