@@ -199,5 +199,4 @@ local plug_map = {
 		:with_desc("debug: Open REPL"),
 }
 
-plug_map = bind.override_mapping("tool", plug_map)
-bind.nvim_load_mapping(plug_map)
+return plug_map
