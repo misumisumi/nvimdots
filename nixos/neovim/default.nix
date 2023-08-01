@@ -5,12 +5,12 @@
 , ...
 }:
 with lib; let
-  cfg = config.programs.neovim.activateNvimDots;
+  cfg = config.programs.neovim.nvimdots;
 in
 {
   options = {
     programs.neovim = {
-      activateNvimDots = {
+      nvimdots = {
         enable = mkEnableOption ''
           Activate "ayamir/nvimdots".
           Please see details https://github.com/ayamir/nvimdots
@@ -183,12 +183,12 @@ in
         ignoreCollisions = true;
       };
       buildEnv = [
-        "CPLUS_INCLUDE_PATH=${config.home.profileDirectory}/lib/nvim-depends/include/c++/v1"
-        "PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-depends/pkgconfig"
         "CPATH=${config.home.profileDirectory}/lib/nvim-depends/include"
-        "LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
+        "CPLUS_INCLUDE_PATH=${config.home.profileDirectory}/lib/nvim-depends/include/c++/v1"
         "LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
+        "LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
         "NIX_LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
+        "PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-depends/pkgconfig"
       ];
     in
     mkIf cfg.enable
@@ -197,9 +197,9 @@ in
           "nvim/lua".source = ../../lua;
           "nvim/init.lua".source = ../../init.lua;
         };
-        home.packages = [
+        home.packages = with pkgs; [
           ripgrep
-        ] ++ optionals cfg.setBuildEnv [ nvim-depends-library nvim-depends-include nvim-depends-pkgconfig ];
+        ] ++ optionals cfg.setBuildEnv [ patchelf nvim-depends-library nvim-depends-include nvim-depends-pkgconfig ];
         home.extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
         home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so " + "nvim";
 
