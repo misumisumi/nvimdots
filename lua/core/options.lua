@@ -136,3 +136,4 @@ local function load_options()
 end
 
 load_options()
+local _ = pcall(require, "user.options")
