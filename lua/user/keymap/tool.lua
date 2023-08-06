@@ -45,6 +45,9 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("git: Toggle lazygit"),
+	-- Plugin: vim-translator
+	["v|<leader>tw"] = map_cr("TranslateW"):with_noremap():with_silent():with_desc("Translator: show window"),
+	["v|<leader>tx"] = map_cr("TranslateX"):with_noremap():with_silent():with_desc("Translator: copy clipboard"),
 }
 
 return plug_map

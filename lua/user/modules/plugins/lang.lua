@@ -11,6 +11,7 @@ lang["lervag/vimtex"] = {
 	config = require("lang.vimtex"),
 }
 lang["dhruvasagar/vim-table-mode"] = {
+	lazy = true,
 	ft = "markdown",
 }
 

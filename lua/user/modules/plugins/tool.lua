@@ -1,6 +1,7 @@
 local tool = {}
 
 tool["nvim-neo-tree/neo-tree.nvim"] = {
+	lazy = true,
 	branch = "v3.x",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
@@ -19,6 +20,7 @@ tool["nvim-neo-tree/neo-tree.nvim"] = {
 	config = require("tool.neo-tree"),
 }
 tool["tyru/open-browser.vim"] = {
+	lazy = true,
 	cmd = {
 		"OpenBrowser",
 		"OpenBrowserSearch",
@@ -27,6 +29,7 @@ tool["tyru/open-browser.vim"] = {
 	config = require("tool.open-browser"),
 }
 tool["vim-skk/skkeleton"] = {
+	lazy = true,
 	dependencies = {
 		{ "vim-denops/denops.vim" },
 		{ "delphinus/skkeleton_indicator.nvim" },
@@ -34,11 +37,8 @@ tool["vim-skk/skkeleton"] = {
 	event = "VeryLazy",
 	config = require("tool.skkeleton"),
 }
-tool["mbbill/undotree"] = {
-	cmd = "UndotreeToggle",
-	config = require("tool.undotree"),
-}
 tool["voldikss/vim-translator"] = {
+	lazy = true,
 	cmd = {
 		"Translate",
 		"TranslateW",

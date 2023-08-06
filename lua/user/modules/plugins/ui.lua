@@ -1,6 +1,7 @@
 local ui = {}
 
 ui["petertriho/nvim-scrollbar"] = {
+	lazy = true,
 	dependencies = {
 		{
 			"kevinhwang91/nvim-hlslens",
