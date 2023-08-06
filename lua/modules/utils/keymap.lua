@@ -92,46 +92,73 @@ local function get_fallback(map)
 	end
 end
 
----@param cond string
 ---@param mode string
 ---@param lhs string
 ---@param rhs function
 ---@param opts? table
-local function amend(cond, mode, lhs, rhs, opts)
+---@param cond? string
+local function amend(mode, lhs, rhs, opts, cond)
 	local map = get_map(mode, lhs)
 	local fallback = get_fallback(map)
 	local options = vim.deepcopy(opts) or {}
-	options.desc = table.concat({
-		"[" .. cond,
-		(options.desc and ": " .. options.desc or ""),
-		"]",
-		(map.desc and " / " .. map.desc or ""),
-	})
+	if cond ~= nil then
+		options.desc = table.concat({
+			"[" .. cond,
+			(options.desc and ": " .. options.desc or ""),
+			"]",
+			(map.desc and " / " .. map.desc or ""),
+		})
+	end
 	vim.keymap.set(mode, lhs, function()
 		rhs(fallback)
 	end, options)
 end
 
 ---Amend the existing keymap.
----@param cond string
 ---@param mode string | string[]
 ---@param lhs string
 ---@param rhs function
 ---@param opts? table
-local function modes_amend(cond, mode, lhs, rhs, opts)
+---@param cond? string
+local function modes_amend(mode, lhs, rhs, opts, cond)
 	if type(mode) == "table" then
 		for _, m in ipairs(mode) do
-			amend(cond, m, lhs, rhs, opts)
+			amend(m, lhs, rhs, opts, cond)
 		end
 	else
-		amend(cond, mode, lhs, rhs, opts)
+		amend(mode, lhs, rhs, opts, cond)
 	end
 end
 
----@param cond string
----@param global_flag string
+---@param mode string
+---@param lhs string
+---@param buf? number
+local function unset(mode, lhs, buf)
+	print(mode, lhs)
+	if buf == nil then
+		vim.api.nvim_del_keymap(mode, lhs)
+	else
+		vim.api.nvim_buf_del_keymap(buf, mode, lhs)
+	end
+end
+
+---@param mode string | string[]
+---@param lhs string
+---@param buf? number
+local function modes_unset(mode, lhs, buf)
+	if type(mode) == "table" then
+		for _, m in ipairs(mode) do
+			unset(m, lhs, buf)
+		end
+	else
+		unset(mode, lhs, buf)
+	end
+end
+
 ---@param mapping table<string, map_rhs>
-function M.amend(cond, global_flag, mapping)
+---@param cond? string
+---@param global_flag? string
+function M.amend(mapping, cond, global_flag)
 	for key, value in pairs(mapping) do
 		local modes, keymap = key:match("([^|]*)|?(.*)")
 		if type(value) == "table" then
@@ -145,6 +172,8 @@ function M.amend(cond, global_flag, mapping)
 					fallback()
 				end
 			end, options)
+		elseif value == "" or false then
+			modes_unset(vim.split(modes, ""), keymap)
 		end
 	end
 end
