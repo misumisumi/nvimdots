@@ -34,7 +34,6 @@ function Lazy:load_plugins()
 		local plugins_list = vim.split(fn.glob(modules_dir .. "/plugins/*.lua"), "\n")
 		local user_plugins_list = vim.split(fn.glob(user_modules_dir .. "/plugins/*.lua"), "\n")
 		if user_plugins_list[1] ~= "" then
-			print("load")
 			plugins_list = vim.list_extend(plugins_list, user_plugins_list)
 		end
 		if type(plugins_list) == "table" then
