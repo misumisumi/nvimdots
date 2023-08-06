@@ -13,7 +13,7 @@ local debug_keymap = {
 
 function M.load_extras()
 	if not did_load_debug_mappings then
-		require("modules.utils.keymap").amend(debug_keymap, "Debugging", "_debugging")
+		require("modules.utils.keymap").amend(debug_keymap, "_debugging", "Debugging")
 		did_load_debug_mappings = true
 	end
 end

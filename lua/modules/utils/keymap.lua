@@ -180,10 +180,35 @@ local function modes_unset(mode, lhs, buf)
 	end
 end
 
+---@param mode string
+---@param lhs string
+---@param buf? number
+local function unset(mode, lhs, buf)
+	print(mode, lhs)
+	if buf == nil then
+		vim.api.nvim_del_keymap(mode, lhs)
+	else
+		vim.api.nvim_buf_del_keymap(buf, mode, lhs)
+	end
+end
+
+---@param mode string | string[]
+---@param lhs string
+---@param buf? number
+local function modes_unset(mode, lhs, buf)
+	if type(mode) == "table" then
+		for _, m in ipairs(mode) do
+			unset(m, lhs, buf)
+		end
+	else
+		unset(mode, lhs, buf)
+	end
+end
+
 ---@param mapping table<string, map_rhs>
+---@param global_flag string
 ---@param cond? string
----@param global_flag? string
-function M.amend(mapping, cond, global_flag)
+function M.amend(mapping, global_flag, cond)
 	for key, value in pairs(mapping) do
 		local modes, keymap = key:match("([^|]*)|?(.*)")
 		cond = cond or ""
