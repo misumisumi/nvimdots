@@ -92,12 +92,12 @@ local function get_fallback(map)
 	end
 end
 
+---@param cond string
 ---@param mode string
 ---@param lhs string
 ---@param rhs function
 ---@param opts? table
----@param cond? string
-local function amend(mode, lhs, rhs, opts, cond)
+local function amend(cond, mode, lhs, rhs, opts)
 	local map = get_map(mode, lhs)
 	local fallback = get_fallback(map)
 	local options = vim.deepcopy(opts) or {}
@@ -115,18 +115,18 @@ local function amend(mode, lhs, rhs, opts, cond)
 end
 
 ---Amend the existing keymap.
+---@param cond string
 ---@param mode string | string[]
 ---@param lhs string
 ---@param rhs function
 ---@param opts? table
----@param cond? string
-local function modes_amend(mode, lhs, rhs, opts, cond)
+local function modes_amend(cond, mode, lhs, rhs, opts)
 	if type(mode) == "table" then
 		for _, m in ipairs(mode) do
-			amend(m, lhs, rhs, opts, cond)
+			amend(cond, m, lhs, rhs, opts)
 		end
 	else
-		amend(mode, lhs, rhs, opts, cond)
+		amend(cond, mode, lhs, rhs, opts)
 	end
 end
 
@@ -134,57 +134,6 @@ end
 ---@param lhs string
 ---@param buf? number
 local function unset(mode, lhs, buf)
-	print(mode, lhs)
-	if buf == nil then
-		vim.api.nvim_del_keymap(mode, lhs)
-	else
-		vim.api.nvim_buf_del_keymap(buf, mode, lhs)
-	end
-end
-
----@param mode string | string[]
----@param lhs string
----@param buf? number
-local function modes_unset(mode, lhs, buf)
-	if type(mode) == "table" then
-		for _, m in ipairs(mode) do
-			unset(m, lhs, buf)
-		end
-	else
-		unset(mode, lhs, buf)
-	end
-end
-
----@param mode string
----@param lhs string
----@param buf? number
-local function unset(mode, lhs, buf)
-	print(mode, lhs)
-	if buf == nil then
-		vim.api.nvim_del_keymap(mode, lhs)
-	else
-		vim.api.nvim_buf_del_keymap(buf, mode, lhs)
-	end
-end
-
----@param mode string | string[]
----@param lhs string
----@param buf? number
-local function modes_unset(mode, lhs, buf)
-	if type(mode) == "table" then
-		for _, m in ipairs(mode) do
-			unset(m, lhs, buf)
-		end
-	else
-		unset(mode, lhs, buf)
-	end
-end
-
----@param mode string
----@param lhs string
----@param buf? number
-local function unset(mode, lhs, buf)
-	print(mode, lhs)
 	if buf == nil then
 		vim.api.nvim_del_keymap(mode, lhs)
 	else

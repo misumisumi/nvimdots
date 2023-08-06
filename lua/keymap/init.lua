@@ -30,5 +30,6 @@ require("keymap.ui")
 
 local ok, user_keymap = pcall(require, "user.keymap")
 if ok then
-	require("modules.utils.keymap").amend(user_keymap)
+	_G._user_map = true
+	require("modules.utils.keymap").amend(user_keymap, "_user_map")
 end
