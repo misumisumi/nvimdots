@@ -27,3 +27,8 @@ require("keymap.editor")
 require("keymap.lang")
 require("keymap.tool")
 require("keymap.ui")
+
+local ok, user_keymap = pcall(require, "user.keymap")
+if ok then
+	require("modules.utils.keymap").amend("", "_keymap", user_keymap)
+end
