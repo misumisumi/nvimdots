@@ -10,5 +10,8 @@ lang["lervag/vimtex"] = {
 	ft = "tex",
 	config = require("lang.vimtex"),
 }
+lang["dhruvasagar/vim-table-mode"] = {
+	ft = "markdown",
+}
 
 return lang

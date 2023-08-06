@@ -38,7 +38,26 @@ tool["mbbill/undotree"] = {
 	cmd = "UndotreeToggle",
 	config = require("tool.undotree"),
 }
-
+tool["voldikss/vim-translator"] = {
+	cmd = {
+		"Translate",
+		"TranslateW",
+		"TranslateR",
+		"TranslateX",
+		"TranslateH",
+		"TranslateL",
+	},
+	config = require("tool.vim-translator"),
+}
+tool["nvim-telescope/telescope.nvim"] = {
+	dependencies = {
+		{ "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" },
+		{ "nvim-lua/popup.nvim" },
+		{ "barrett-ruth/telescope-http.nvim" },
+		{ "misumisumi/telescope-software-licenses.nvim" },
+		{ "LukasPietzschmann/telescope-tabs" },
+	},
+}
 -- Disalbe plugins
 tool["nvim-tree/nvim-tree.lua"] = {
 	enabled = false,
