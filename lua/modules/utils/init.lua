@@ -249,38 +249,57 @@ function M.tobool(value)
 	end
 end
 
----@param plugin_name string @Plugin name
+---@param plugin_name string @Name of the plugin
 ---@param opts table @Default options for plugin
----@param isVimPlugin? boolean @If plugin is made by vimscript
----@param extraSetupFunc? function @When the plugin name that calls setup is different from `modules/configs/*.lua`
-function M.load_plugin(plugin_name, opts, isVimPlugin, extraSetupFunc)
-	isVimPlugin = isVimPlugin or false
-	local ok, custom = pcall(require, "user.modules." .. plugin_name)
-	if ok then
-		local setupFunc = extraSetupFunc or require(plugin_name).setup
-		if custom == nil then
-			setupFunc(false)
-		elseif type(custom) == "table" then
-			assert(
-				not isVimPlugin,
-				"This plugin is not made by lua, so define options in functions (probably using `vim.g.*`)"
-			)
-			opts = vim.tbl_deep_extend("force", opts, custom)
-			setupFunc(opts)
-		elseif type(custom) == "function" then
-			local user_opts = custom()
-			if type(user_opts) == "table" and not isVimPlugin then
-				setupFunc(user_opts)
-			end
+---@param vim_plugin? boolean @If this plugin is a Vimscript one
+---@param setup_callback? function @Provide this if the plugin's setup function is not the usual one
+function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
+	vim_plugin = vim_plugin or false
+	local ok, custom = pcall(require, "user.configs." .. plugin_name)
+	if ok and vim_plugin then
+		if type(custom) == "function" then
+			custom()
 		else
-			error(
-				"Please return `nil` if you disable plugin or `table` if you override config or `function` if you replace config completely "
+			vim.notify(
+				"'"
+					.. plugin_name
+					.. "' is probably not a Lua plugin, so return a function with options defined (probably using `vim.g.*`)",
+				vim.log.levels.ERROR,
+				{ title = "[utils] Runtime Error" }
 			)
 		end
-	elseif not isVimPlugin then
-		local setupFunc = extraSetupFunc or require(plugin_name).setup
-		setupFunc(opts)
+	elseif not vim_plugin then
+		setup_callback = setup_callback or require(plugin_name).setup
+		if ok then
+			if type(custom) == "table" then
+				opts = vim.tbl_deep_extend("force", opts, custom)
+				setup_callback(opts)
+			elseif type(custom) == "function" then
+				local user_opts = custom()
+				if type(user_opts) == "table" then
+					setup_callback(user_opts)
+				end
+			else
+				vim.notify(
+					"Please return `table` if you override some of default options or `function` if you replace default options completely",
+					vim.log.levels.ERROR,
+					{ title = "[utils] Runtime Error" }
+				)
+			end
+		else
+			setup_callback(opts)
+		end
 	end
+end
+
+---@param config table @Default config
+---@param user_config_path string @User config file path
+function M.config_extend(config, user_config_path)
+	local ok, user_config = pcall(require, user_config_path)
+	if ok and type(user_config) == "table" then
+		config = vim.tbl_deep_extend("force", config, user_config)
+	end
+	return config
 end
 
 return M
