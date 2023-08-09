@@ -28,7 +28,7 @@ return {
 	-- Plugin: vim-fugitive
 	["n|gps"] = "",
 	["n|gpl"] = "",
-	["n|<leader>ga"] = map_cr("Gwrite"):with_noremap():with_silent():with_desc("git: Add"),
+	["n|<leader>ga"] = map_cr("Git add %"):with_noremap():with_silent():with_desc("git: Add"),
 	["n|<leader>gc"] = map_cr("Git commit"):with_noremap():with_silent():with_desc("git: Commit"),
 	["n|<leader>gd"] = map_cr("Gdiffsplit"):with_noremap():with_silent():with_desc("git: DiffSplit"),
 	["n|<leader>gps"] = map_cr("Git push"):with_noremap():with_silent():with_desc("Git Push"),

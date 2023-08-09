@@ -9,7 +9,6 @@ return function()
 		["python"] = "https://docs.python.org/dev/search.html?q={query}&check_keywords=yes&area=default",
 		["twitter-search"] = "https://twitter.com/search/{query}",
 		["twitter-user"] = "https://twitter.com/{query}",
-		["vim"] = "https://www.google.com/cse?cx=partner-pub-3005259998294962%3Abvyni59kjr1&ie=ISO-8859-1&q={query}&sa=Search&siteurl=www.vim.org%2F#gsc.tab=0&gsc.q={query}&gsc.page=1",
 		["wikipedia"] = "https://en.wikipedia.org/wiki/{query}",
 		["wikipedia-ja"] = "https://ja.wikipedia.org/wiki/{query}",
 		["archwiki"] = "https://wiki.archlinux.jp/index.php/{query}",
