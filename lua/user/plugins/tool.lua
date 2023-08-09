@@ -11,10 +11,6 @@ tool["nvim-neo-tree/neo-tree.nvim"] = {
 	},
 	cmd = {
 		"Neotree",
-		"NeoTreeShow",
-		"NeoTreeShowToggle",
-		"NeoTreeShowInSplit",
-		"NeoTreeShowInSplitToggle",
 	},
 	-- event = "BufReadPost",
 	config = require("tool.neo-tree"),
