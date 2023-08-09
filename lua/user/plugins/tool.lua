@@ -58,4 +58,5 @@ tool["nvim-telescope/telescope.nvim"] = {
 tool["nvim-tree/nvim-tree.lua"] = {
 	enabled = false,
 }
+
 return tool
