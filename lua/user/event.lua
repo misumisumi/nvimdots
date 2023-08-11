@@ -1,5 +1,7 @@
-return {
+local definitions = {
+	-- Example
 	bufs = {
+		{ "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
 		-- Auto toggle fcitx5
 		{ "VimEnter", "* :silent", "!fcitx5-remote -g EN" },
 		{ "FocusGained", "* :silent", "!fcitx5-remote -g EN" },
@@ -7,3 +9,5 @@ return {
 		{ "VimLeave", "* :silent", "!fcitx5-remote -g SKK" },
 	},
 }
+
+return definitions
