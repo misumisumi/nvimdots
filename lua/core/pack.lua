@@ -26,15 +26,22 @@ function Lazy:load_plugins()
 	local append_nativertp = function()
 		package.path = package.path
 			.. string.format(";%s;%s", modules_dir .. "/configs/?.lua", modules_dir .. "/configs/?/init.lua")
+		table.insert(package.loaders, function(modulename)
+			local modulepath = user_config_dir .. "/configs/" .. modulename:gsub("%.", "/") .. ".lua"
+			local filename = modulepath:gsub("%?", modulepath)
+			local file = io.open(filename, "rb")
+			if file then
+				return assert(load(assert(file:read("*a")), filename))
+			end
+			return string.format("\n\tno file '%s' (checked with custom loader)", filename)
+		end)
 	end
 
 	local get_plugins_list = function()
 		local list = {}
 		local plugins_list = vim.split(fn.glob(modules_dir .. "/plugins/*.lua"), "\n")
 		local user_plugins_list = vim.split(fn.glob(user_config_dir .. "/plugins/*.lua"), "\n", { trimempty = true })
-		if not vim.tbl_isempty(user_plugins_list) then
-			vim.list_extend(plugins_list, user_plugins_list)
-		end
+		vim.list_extend(plugins_list, user_plugins_list)
 		for _, f in ipairs(plugins_list) do
 			-- fill list with `plugins/*.lua`'s path used for later `require` like this:
 			-- list[#list + 1] = "plugins/completion.lua"
@@ -54,6 +61,9 @@ function Lazy:load_plugins()
 				self.modules[#self.modules + 1] = vim.tbl_extend("force", { name }, conf)
 			end
 		end
+	end
+	for _, name in ipairs(settings.disabled_plugins) do
+		self.modules[#self.modules + 1] = { name, enabled = false }
 	end
 end
 
