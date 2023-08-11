@@ -54,9 +54,5 @@ tool["nvim-telescope/telescope.nvim"] = {
 		{ "LukasPietzschmann/telescope-tabs" },
 	},
 }
--- Disalbe plugins
-tool["nvim-tree/nvim-tree.lua"] = {
-	enabled = false,
-}
 
 return tool

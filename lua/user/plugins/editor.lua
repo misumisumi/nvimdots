@@ -15,8 +15,4 @@ editor["kylechui/nvim-surround"] = {
 	config = require("editor.nvim-surround"),
 }
 
-editor["m4xshen/autoclose.nvim"] = {
-	enabled = false,
-}
-
 return editor
