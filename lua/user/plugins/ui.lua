@@ -5,11 +5,11 @@ ui["petertriho/nvim-scrollbar"] = {
 	dependencies = {
 		{
 			"kevinhwang91/nvim-hlslens",
-			config = require("ui.nvim-hlslens"),
+			config = require("user.configs.ui.nvim-hlslens"),
 		},
 	},
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("ui.nvim-scrollbar"),
+	config = require("user.configs.ui.nvim-scrollbar"),
 }
 
 return ui

@@ -13,7 +13,7 @@ tool["nvim-neo-tree/neo-tree.nvim"] = {
 		"Neotree",
 	},
 	-- event = "BufReadPost",
-	config = require("tool.neo-tree"),
+	config = require("user.configs.tool.neo-tree"),
 }
 tool["tyru/open-browser.vim"] = {
 	lazy = true,
@@ -22,7 +22,7 @@ tool["tyru/open-browser.vim"] = {
 		"OpenBrowserSearch",
 		"OpenBrowserSmartSearch",
 	},
-	config = require("tool.open-browser"),
+	config = require("user.configs.tool.open-browser"),
 }
 tool["vim-skk/skkeleton"] = {
 	lazy = true,
@@ -31,7 +31,7 @@ tool["vim-skk/skkeleton"] = {
 		{ "delphinus/skkeleton_indicator.nvim" },
 	},
 	event = "VeryLazy",
-	config = require("tool.skkeleton"),
+	config = require("user.configs.tool.skkeleton"),
 }
 tool["voldikss/vim-translator"] = {
 	lazy = true,
@@ -43,7 +43,7 @@ tool["voldikss/vim-translator"] = {
 		"TranslateH",
 		"TranslateL",
 	},
-	config = require("tool.vim-translator"),
+	config = require("user.configs.tool.vim-translator"),
 }
 tool["nvim-telescope/telescope.nvim"] = {
 	dependencies = {

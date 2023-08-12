@@ -3,7 +3,7 @@ local completion = {}
 completion["windwp/nvim-autopairs"] = {
 	lazy = true,
 	event = "InsertEnter",
-	config = require("completion.nvim-autopairs"),
+	config = require("user.configs.completion.nvim-autopairs"),
 }
 
 return completion
