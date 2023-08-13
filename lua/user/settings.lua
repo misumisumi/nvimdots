@@ -4,7 +4,7 @@ local settings = {}
 settings["use_ssh"] = true
 settings["lsp_deps"] = {
 	"jsonls",
-	"rnix",
+	"nil_ls",
 	"terraformls",
 	"texlab",
 }
