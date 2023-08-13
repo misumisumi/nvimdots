@@ -131,9 +131,6 @@ in
         home.extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
         home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so " + "nvim";
 
-        programs.java.enable = cfg.withJava;
-        programs.dotnet.dev.enable = cfg.withDotNET;
-
         programs.neovim = {
           enable = true;
           viAlias = true; # Replace from vi&vim to neovim
