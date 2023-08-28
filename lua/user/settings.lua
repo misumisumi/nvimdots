@@ -3,7 +3,9 @@ local settings = {}
 -- Example
 settings["use_ssh"] = true
 settings["lsp_deps"] = {
+	"bashls",
 	"jsonls",
+	"marksman",
 	"nil_ls",
 	"terraformls",
 	"texlab",
