@@ -53,7 +53,7 @@ settings["load_big_files_faster"] = true
 settings["palette_overwrite"] = {}
 
 -- Set the colorscheme to use here.
--- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
+-- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`.
 ---@type string
 settings["colorscheme"] = "catppuccin"
 
@@ -121,6 +121,33 @@ settings["dap_deps"] = {
 	"codelldb", -- C-Family
 	"delve", -- Go
 	"python", -- Python (debugpy)
+}
+
+-- Set the Treesitter parsers that will be installed during bootstrap here.
+-- Check the below link for all supported languages:
+-- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+---@type string[]
+settings["treesitter_deps"] = {
+	"bash",
+	"c",
+	"cpp",
+	"css",
+	"go",
+	"gomod",
+	"html",
+	"javascript",
+	"json",
+	"latex",
+	"lua",
+	"make",
+	"markdown",
+	"markdown_inline",
+	"python",
+	"rust",
+	"typescript",
+	"vimdoc",
+	"vue",
+	"yaml",
 }
 
 return require("modules.utils").extend_config(settings, "user.settings")
