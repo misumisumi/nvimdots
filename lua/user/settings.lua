@@ -17,4 +17,9 @@ settings["disabled_plugins"] = {
 	"dstein64/nvim-scrollview",
 }
 
+settings["treesitter_deps"] = {
+	"nix",
+	"terraform",
+}
+
 return settings
