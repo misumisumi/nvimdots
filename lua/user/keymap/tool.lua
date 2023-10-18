@@ -18,6 +18,8 @@ return {
 	["i|<C-Space>"] = map_cmd("<Plug>(skkeleton-toggle)"):with_silent(),
 	["c|<C-Space>"] = map_cmd("<Plug>(skkeleton-toggle)"):with_silent(),
 	-- Plugin: telescope
+	["n|<leader>tt"] = map_cr("TodoQuickfix"):with_noremap():with_silent():with_desc("tool: Toggle Todos in project"),
+	["n|<leader>ft"] = map_cr("TodoTelescope"):with_noremap():with_silent():with_desc("find: Todos in project"),
 	["n|<leader><S-cr>"] = map_callback(function()
 			_command_panel()
 		end)
