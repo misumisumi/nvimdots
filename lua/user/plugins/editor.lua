@@ -14,5 +14,11 @@ editor["kylechui/nvim-surround"] = {
 	event = "InsertEnter",
 	config = require("user.configs.editor.nvim-surround"),
 }
+editor["danymat/neogen"] = {
+	lazy = true,
+	dependencies = "nvim-treesitter/nvim-treesitter",
+	cmd = "Neogen",
+	config = require("user.configs.editor.neogen"),
+}
 
 return editor

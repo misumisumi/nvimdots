@@ -17,11 +17,7 @@ tool["nvim-neo-tree/neo-tree.nvim"] = {
 }
 tool["tyru/open-browser.vim"] = {
 	lazy = true,
-	cmd = {
-		"OpenBrowser",
-		"OpenBrowserSearch",
-		"OpenBrowserSmartSearch",
-	},
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("user.configs.tool.open-browser"),
 }
 tool["vim-skk/skkeleton"] = {
@@ -32,6 +28,12 @@ tool["vim-skk/skkeleton"] = {
 	},
 	event = "VeryLazy",
 	config = require("user.configs.tool.skkeleton"),
+}
+tool["folke/todo-comments.nvim"] = {
+	lazy = true,
+	dependencies = { "nvim-lua/plenary.nvim" },
+	event = "VeryLazy",
+	config = require("user.configs.tool.todo-comments"),
 }
 tool["voldikss/vim-translator"] = {
 	lazy = true,
