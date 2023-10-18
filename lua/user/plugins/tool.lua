@@ -17,11 +17,7 @@ tool["nvim-neo-tree/neo-tree.nvim"] = {
 }
 tool["tyru/open-browser.vim"] = {
 	lazy = true,
-	cmd = {
-		"OpenBrowser",
-		"OpenBrowserSearch",
-		"OpenBrowserSmartSearch",
-	},
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("user.configs.tool.open-browser"),
 }
 tool["vim-skk/skkeleton"] = {

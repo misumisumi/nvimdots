@@ -5,7 +5,6 @@ local map_callback = bind.map_callback
 
 return {
 	-- Remove default keymap
-	["n|<leader>nf"] = "",
 	["n|<leader>nr"] = "",
 
 	-- Plugin: Neotree
@@ -26,6 +25,7 @@ return {
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
 	-- Plugin: vim-fugitive
+	["n|g"] = "",
 	["n|gps"] = "",
 	["n|gpl"] = "",
 	["n|<leader>ga"] = map_cr("Git add %"):with_noremap():with_silent():with_desc("git: Add"),
