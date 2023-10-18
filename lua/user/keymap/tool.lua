@@ -17,9 +17,26 @@ return {
 	-- Plugin: skkeleton
 	["i|<C-Space>"] = map_cmd("<Plug>(skkeleton-toggle)"):with_silent(),
 	["c|<C-Space>"] = map_cmd("<Plug>(skkeleton-toggle)"):with_silent(),
-	-- Plugin: telescope
-	["n|<leader>tt"] = map_cr("TodoQuickfix"):with_noremap():with_silent():with_desc("tool: Toggle Todos in project"),
+	-- Plugin: todo-comments
+	["n|<leader>tt"] = map_cr("TodoQuickFix"):with_noremap():with_silent():with_desc("tool: Toggle Todos in project"),
 	["n|<leader>ft"] = map_cr("TodoTelescope"):with_noremap():with_silent():with_desc("find: Todos in project"),
+	["n|]t"] = map_callback(function()
+			require("todo-comments").jump_next()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("tool: Next todo comment"),
+	["n|[t"] = map_callback(function()
+			require("todo-comments").jump_prev()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("tool: Prev todo comment"),
+	-- Plugin: telescope
+	["n|<leader>fl"] = map_cr("Telescope diagnostics")
+		:with_noremap()
+		:with_silent()
+		:with_desc("tool: Toggle command panel"),
 	["n|<leader><S-cr>"] = map_callback(function()
 			_command_panel()
 		end)
