@@ -6,7 +6,6 @@ settings["lsp_deps"] = {
 	"bashls",
 	"jsonls",
 	"marksman",
-	"nil_ls",
 	"terraformls",
 	"texlab",
 }
