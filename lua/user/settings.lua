@@ -21,4 +21,8 @@ settings["treesitter_deps"] = {
 	"terraform",
 }
 
+settings["null_ls_deps"] = {
+	"taplo",
+}
+
 return settings
