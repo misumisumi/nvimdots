@@ -38,7 +38,7 @@ return function()
 		showCandidatesCount = 3,
 		skkServerReqEnc = "utf-8",
 		skkServerResEnc = "utf-8",
-		sources = { "skk_dictionary" "skk_server" },
+		sources = { "skk_dictionary", "skk_server" },
 		usePopup = true,
 		userDictionary = global.cache_dir .. "skkeleton",
 	}
