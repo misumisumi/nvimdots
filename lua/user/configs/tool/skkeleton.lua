@@ -32,16 +32,15 @@ return function()
 
 	local dict_path = fcitx_config_path .. "skk/dictionary_list"
 	local opts = {
+		eggLikeNewline = true,
 		globalDictionaries = lines_from(dict_path),
-		globalJisyoEncoding = "utf-8",
+		immediatelyCancel = false,
 		showCandidatesCount = 3,
 		skkServerReqEnc = "utf-8",
 		skkServerResEnc = "utf-8",
-		immediatelyCancel = false,
+		sources = { "skk_dictionary" "skk_server" },
 		usePopup = true,
-		useSkkServer = false,
-		userJisyo = global.cache_dir .. "skkeleton",
-		eggLikeNewline = true,
+		userDictionary = global.cache_dir .. "skkeleton",
 	}
 	vim.fn["skkeleton#config"](opts)
 	local keymaps = {
