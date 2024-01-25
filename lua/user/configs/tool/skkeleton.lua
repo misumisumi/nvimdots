@@ -33,14 +33,13 @@ return function()
 	local dict_path = fcitx_config_path .. "skk/dictionary_list"
 	local opts = {
 		globalDictionaries = lines_from(dict_path),
-		globalJisyoEncoding = "utf-8",
 		showCandidatesCount = 3,
 		skkServerReqEnc = "utf-8",
 		skkServerResEnc = "utf-8",
 		immediatelyCancel = false,
 		usePopup = true,
 		useSkkServer = false,
-		userJisyo = global.cache_dir .. "skkeleton",
+		userDictionary = global.cache_dir .. "skkeleton",
 		eggLikeNewline = true,
 	}
 	vim.fn["skkeleton#config"](opts)
