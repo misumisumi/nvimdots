@@ -6,13 +6,6 @@ local map_callback = bind.map_callback
 return {
 	-- Remove default keymap
 	["n|<leader>nr"] = "",
-	-- Plugin: dapui
-	["n|<leader>du"] = map_callback(function()
-			require("dapui").toggle()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("debug: Show dapui"),
 
 	-- Plugin: Neotree
 	["n|<leader>e"] = map_cr("Neotree toggle"):with_noremap():with_silent():with_desc("filetree: Toggle"),
