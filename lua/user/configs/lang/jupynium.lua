@@ -38,7 +38,7 @@ return {
 	-- Without this step, you can't use :JupyniumStartSync
 	-- Related command :JupyniumAttachToServer
 	auto_attach_to_server = {
-		enable = true,
+		enable = false,
 		file_pattern = { "*.ju.*", "*.md" },
 	},
 
@@ -46,7 +46,7 @@ return {
 	-- when you open a .ju.py file on nvim.
 	-- Related command :JupyniumStartSync
 	auto_start_sync = {
-		enable = true,
+		enable = false,
 		file_pattern = { "*.ju.*", "*.md" },
 	},
 
