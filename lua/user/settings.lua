@@ -6,6 +6,7 @@ settings["lsp_deps"] = {
 	"bashls",
 	"jsonls",
 	"marksman",
+	"taplo",
 	"terraformls",
 	"texlab",
 }
@@ -21,8 +22,6 @@ settings["treesitter_deps"] = {
 	"terraform",
 }
 
-settings["null_ls_deps"] = {
-	"taplo",
-}
+settings["null_ls_deps"] = {}
 
 return settings
