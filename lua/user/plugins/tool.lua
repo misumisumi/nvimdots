@@ -20,8 +20,9 @@ tool["tyru/open-browser.vim"] = {
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("user.configs.tool.open-browser"),
 }
-tool["vim-skk/skkeleton"] = {
+tool["misumisumi/skkeleton"] = {
 	lazy = true,
+	branch = "fix-mapset",
 	dependencies = {
 		{ "vim-denops/denops.vim" },
 		{ "delphinus/skkeleton_indicator.nvim" },
