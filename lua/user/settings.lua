@@ -9,6 +9,7 @@ settings["lsp_deps"] = {
 	"taplo",
 	"terraformls",
 	"texlab",
+	"typos",
 }
 settings["disabled_plugins"] = {
 	"m4xshen/autoclose.nvim",
