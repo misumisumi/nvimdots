@@ -23,6 +23,8 @@ settings["treesitter_deps"] = {
 	"terraform",
 }
 
-settings["null_ls_deps"] = {}
+settings["null_ls_deps"] = {
+	"textlint",
+}
 
 return settings
