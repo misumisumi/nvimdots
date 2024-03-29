@@ -1,9 +1,10 @@
 local null_ls = require("null-ls")
+local btns = null_ls.builtins
 return {
 	handlers = function()
 		return {
 			textlint = function()
-				null_ls.register(null_ls.builtins.diagnostics.textlint.with({
+				null_ls.register(btns.diagnostics.textlint.with({
 					condition = function(utils)
 						return utils.root_has_file({ ".textlintformat" })
 					end,
