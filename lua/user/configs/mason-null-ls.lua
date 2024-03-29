@@ -3,7 +3,11 @@ return {
 	handlers = function()
 		return {
 			textlint = function()
-				null_ls.register(null_ls.builtins.diagnostics.textlint)
+				null_ls.register(null_ls.builtins.diagnostics.textlint.with({
+					condition = function(utils)
+						return utils.root_has_file({ ".textlintformat" })
+					end,
+				}))
 				-- disable textlint formatting but keep the command
 				vim.api.nvim_create_user_command("TextlintFix", function()
 					if vim.fn.executable("textlint") == 1 then
