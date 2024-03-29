@@ -8,15 +8,4 @@ return {
 	["n|<leader>nf"] = map_cr("Neogen"):with_noremap():with_silent():with_desc("edit: Generate annotation"),
 	-- Plugin: nvim-bufdel
 	["n|<leader>bD"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
-	-- Plugin: vim-easy-align
-	["n|gea"] = map_callback(function()
-			return esc("<Plug>(EasyAlign)")
-		end)
-		:with_expr()
-		:with_desc("edit: EasyAlign with delimiter"),
-	["x|gea"] = map_callback(function()
-			return esc("<Plug>(EasyAlign)")
-		end)
-		:with_expr()
-		:with_desc("edit: EasyAlign with delimiter"),
 }

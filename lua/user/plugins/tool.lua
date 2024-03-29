@@ -52,7 +52,6 @@ tool["nvim-telescope/telescope.nvim"] = {
 		{ "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" },
 		{ "nvim-lua/popup.nvim" },
 		{ "barrett-ruth/telescope-http.nvim" },
-		{ "misumisumi/telescope-software-licenses.nvim" },
 		{ "LukasPietzschmann/telescope-tabs" },
 	},
 }
