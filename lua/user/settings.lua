@@ -24,6 +24,7 @@ settings["treesitter_deps"] = {
 }
 
 settings["null_ls_deps"] = {
+	"actionlint",
 	"textlint",
 }
 

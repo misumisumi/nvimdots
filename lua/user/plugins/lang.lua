@@ -22,7 +22,7 @@ lang["kiyoon/jupynium.nvim"] = {
 			return "pip install --user ."
 		end
 	end,
-	config = require("user.configs.lang.jupynium"),
+	opts = require("user.configs.lang.jupynium"),
 }
 
 return lang

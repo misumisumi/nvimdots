@@ -9,7 +9,7 @@ completion["neovim/nvim-lspconfig"] = {
 	dependencies = {
 		{
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			config = require("user.configs.completion.mason-tool-installer"),
+			opts = require("user.configs.completion.mason-tool-installer"),
 		},
 	},
 }

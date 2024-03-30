@@ -29,12 +29,6 @@ tool["vim-skk/skkeleton"] = {
 	event = "VeryLazy",
 	config = require("user.configs.tool.skkeleton"),
 }
-tool["folke/todo-comments.nvim"] = {
-	lazy = true,
-	dependencies = { "nvim-lua/plenary.nvim" },
-	event = "VeryLazy",
-	config = require("user.configs.tool.todo-comments"),
-}
 tool["voldikss/vim-translator"] = {
 	lazy = true,
 	cmd = {

@@ -2,7 +2,7 @@ local editor = {}
 
 editor["max397574/better-escape.nvim"] = {
 	lazy = true,
-	config = require("user.configs.editor.better-escape"),
+	opts = require("user.configs.editor.better-escape"),
 	event = "InsertEnter",
 }
 editor["ntpeters/vim-better-whitespace"] = {
@@ -19,7 +19,7 @@ editor["danymat/neogen"] = {
 	lazy = true,
 	dependencies = "nvim-treesitter/nvim-treesitter",
 	cmd = "Neogen",
-	config = require("user.configs.editor.neogen"),
+	opts = require("user.configs.editor.neogen"),
 }
 
 return editor
