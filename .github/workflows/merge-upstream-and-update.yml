@@ -1,0 +1,73 @@
+name: auto merge upstream
+on:
+  workflow_dispatch: # allows manual triggering
+  schedule:
+    - cron: "0 19 * * 5" # runs weekly on Saturday at 04:00 (JST)
+
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  auto-merge-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: andstor/file-existence-action@v3
+        id: check_lockfile
+        with:
+          files: "lazy-lock.json"
+
+      - name: Merge upstream
+        id: merge-upstream
+        continue-on-error: true
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+          git remote add upstream https://github.com/ayamir/nvimdots.git
+          git fetch upstream
+          git merge upstream/main --allow-unrelated-histories --no-commit --no-ff
+
+          git reset HEAD lazy-lock.json
+          git reset HEAD .github/workflows/update_lockfile.yml
+
+          git checkout lazy-lock.json
+          git checkout .github/workflows/update_lockfile.yml
+
+      - name: Run count-new-commits
+        run: |
+          echo "NEW_COMMIT_COUNT=$(git log --oneline --since '24 hours ago' --perl-regexp --author='^((?!github-actions).*)$' | wc -l)" >> "$GITHUB_ENV"
+
+      - uses: rhysd/action-setup-vim@v1
+        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
+        with:
+          neovim: true
+
+      - name: Run lockfile-autoupdate
+        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
+        timeout-minutes: 5
+        run: |
+          ./scripts/install.sh
+          nvim --headless "+Lazy! update" +qa
+          cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
+
+      - uses: peter-evans/create-pull-request@v6
+        if: >-
+          ${{
+            (
+              steps.check_lockfile.outputs.files_exists == 'true' &&
+              env.NEW_COMMIT_COUNT > 0
+            ) ||
+            steps.merge-upstream.outcome == 'success'
+          }}
+        with:
+          token: ${{ github.token }}
+          commit-message: "chore: auto merge upstream and update lazy-lock.json"
+          title: "chore: auto merge upstream and update lazy-lock.json"
+          branch: "merge_upstream_and_update_lazy_lock_action"
+          labels: |
+            dependencies
+            automated
