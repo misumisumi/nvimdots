@@ -18,14 +18,7 @@ jobs:
       - name: pull upstream
         run: |
           git remote add upstream https://github.com/ayamir/nvimdots.git
-
-          git fetch --prune --unshallow
-          git fetch upstream
-          git checkout -b feat/update
-          git checkout upstream/main -b upstream/main
-          git checkout feat/update
-
-          git merge --no-commit -Xtheirs upstream/main
+          git merge upstream/main --allow-unrelated-histories --no-commit -Xtheris
           git reset HEAD lazy-lock.json
           git reset HEAD .github/workflows/update_lockfile.yml
           git checkout lazy-lock.json
