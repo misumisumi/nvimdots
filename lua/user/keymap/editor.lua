@@ -1,7 +1,5 @@
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
-local map_callback = bind.map_callback
-local esc = bind.escape_termcode
 
 return {
 	-- Plugin: neogen
