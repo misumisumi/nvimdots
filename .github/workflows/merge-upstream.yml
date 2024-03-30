@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: pull upstream
         run: |
-          git fetch upstream
-          git checkout -b feat/merge-upstream
-
-          git merge --no-commit -Xtheirs upstream/main
+          git remote add upstream https://github.com/ayamir/nvimdots.git
+          git merge upstream/main --allow-unrelated-histories --no-commit -Xtheris
           git reset HEAD lazy-lock.json
           git reset HEAD .github/workflows/update_lockfile.yml
           git checkout lazy-lock.json
