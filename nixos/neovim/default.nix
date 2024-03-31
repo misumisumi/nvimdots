@@ -15,6 +15,11 @@ in
           Activate "ayamir/nvimdots".
           Have a look at https://github.com/ayamir/nvimdots for details
         '';
+        bindLazyLock = mkEnableOption ''
+          Bind lazy-lock.json in your repository to $XDG_CONFIG_HOME/nvim.
+          Very powerful in terms of keeping the environment consistent, but has the following side effects.
+          You cannot update it even if you run the Lazy command, because it binds read-only.
+        '';
         setBuildEnv = mkEnableOption ''
           Sets environment variables that resolve build dependencies as required by `mason.nvim` and `nvim-treesitter`
           Environment variables are only visible to `nvim` and have no effect on any parent sessions.
@@ -124,17 +129,21 @@ in
           "nvim/lua".source = ../../lua;
           "nvim/snips".source = ../../snips;
           "nvim/tutor".source = ../../tutor;
+        } // lib.optionalAttrs cfg.bindLazyLock {
+          "nvim/lazy-lock.json".source = ../../lazy-lock.json;
         };
-        home.packages = with pkgs; [
-          ripgrep
-        ] ++ optionals cfg.setBuildEnv [
-          nvim-depends-include
-          nvim-depends-library
-          nvim-depends-pkgconfig
-          patchelf
-        ];
-        home.extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
-        home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " nvim";
+        home = {
+          packages = with pkgs; [
+            ripgrep
+          ] ++ optionals cfg.setBuildEnv [
+            nvim-depends-include
+            nvim-depends-library
+            nvim-depends-pkgconfig
+            patchelf
+          ];
+          extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
+          shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " nvim";
+        };
 
         programs.neovim = {
           enable = true;
@@ -166,9 +175,7 @@ in
                   exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
                 '';
               })
-              (haskellPackages.ghcWithPackages (ps: [
-                # ghcup # ghcup is broken
-              ] ++ cfg.extraHaskellPackages pkgs.haskellPackages))
+              (haskellPackages.ghcWithPackages (ps: cfg.extraHaskellPackages pkgs.haskellPackages))
             ];
 
           extraPython3Packages = ps: with ps; [
