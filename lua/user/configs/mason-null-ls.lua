@@ -25,7 +25,7 @@ return {
 			end,
 			actinlint = function()
 				null_ls.register(btns.diagnostics.actionlint.with({
-					condition = function(utils)
+					condition = function()
 						return vim.fn.fnamemodify(vim.fn.expand("%:p:h"), ":t") == "workflows"
 					end,
 				}))
