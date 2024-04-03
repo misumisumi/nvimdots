@@ -4,7 +4,7 @@ M.is_nixos = function()
 	return vim.fn.filewritable("/etc/NIXOS")
 end
 
-M.exception = {
+M.null_ls = {
 	commitlint = function()
 		return require("null-ls.builtins").diagnostics.commitlint.with({
 			extra_args = function()

@@ -1,9 +1,9 @@
-local exception_null_ls = require("user.configs.exception-null-ls")
+local exception = require("user.configs.exception")
 local null_ls_deps = {
 	"actionlint",
 }
-if not exception_null_ls.is_nixos() then
-	for k, _ in pairs(exception_null_ls.exception) do
+if not exception.is_nixos() then
+	for k, _ in pairs(exception.null_ls) do
 		table.insert(null_ls_deps, k)
 	end
 end

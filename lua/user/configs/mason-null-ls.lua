@@ -1,6 +1,6 @@
 local null_ls = require("null-ls")
 local btns = null_ls.builtins
-local exception_null_ls = require("user.configs.exception-null-ls")
+local exception = require("user.configs.exception")
 local handlers = {
 	actionlint = function()
 		null_ls.register(btns.diagnostics.actionlint.with({
@@ -11,8 +11,8 @@ local handlers = {
 	end,
 }
 
-if not exception_null_ls.is_nixos() then
-	for k, setup in pairs(exception_null_ls.exception) do
+if not exception.is_nixos() then
+	for k, setup in pairs(exception.null_ls) do
 		handlers[k] = null_ls.register(setup())
 	end
 end
