@@ -1,35 +1,24 @@
 local null_ls = require("null-ls")
 local btns = null_ls.builtins
+local exception_null_ls = require("user.configs.exception-null-ls")
+local handlers = {
+	actionlint = function()
+		null_ls.register(btns.diagnostics.actionlint.with({
+			condition = function()
+				return vim.fn.fnamemodify(vim.fn.expand("%:p:h"), ":t") == "workflows"
+			end,
+		}))
+	end,
+}
+
+if not exception_null_ls.is_nixos() then
+	for k, setup in pairs(exception_null_ls.exception) do
+		handlers[k] = null_ls.register(setup())
+	end
+end
+
 return {
 	handlers = function()
-		return {
-			textlint = function()
-				null_ls.register(btns.diagnostics.textlint.with({
-					condition = function(utils)
-						return utils.root_has_file({ ".textlintformat" })
-					end,
-				}))
-				-- disable textlint formatting but keep the command
-				vim.api.nvim_create_user_command("TextlintFix", function()
-					if vim.fn.executable("textlint") == 1 then
-						vim.cmd("silent !textlint --fix %")
-					else
-						vim.cmd("silent !npx textlint --fix %")
-					end
-					vim.notify(
-						string.format("textlint successfully!"),
-						vim.log.levels.INFO,
-						{ title = "Format Success" }
-					)
-				end, {})
-			end,
-			actinlint = function()
-				null_ls.register(btns.diagnostics.actionlint.with({
-					condition = function()
-						return vim.fn.fnamemodify(vim.fn.expand("%:p:h"), ":t") == "workflows"
-					end,
-				}))
-			end,
-		}
+		return handlers
 	end,
 }
