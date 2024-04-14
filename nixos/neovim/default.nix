@@ -128,8 +128,8 @@ in
           packages = with pkgs; [
             ripgrep
           ];
-        };
-        // optionalAttrs (cfg.setBuildEnv && config.home.stateVersion < "24.05") {
+        }
+        // optionalAttrs (cfg.setBuildEnv && (lib.versionOlder config.home.stateVersion "24.05")) {
           shellAliases.nvim = concatStringsSep " " buildEnv + " nvim";
         };
 
@@ -139,7 +139,7 @@ in
           withNodeJs = true;
           withPython3 = true;
           withRuby = true;
-          extraWrapperArgs = optionals (cfg.setBuildEnv && config.home.stateVersion >= "24.05") [
+          extraWrapperArgs = optionals (cfg.setBuildEnv && (lib.versionAtLeast config.home.stateVersion  "24.05")) [
             "--suffix"
             "CPATH"
             ":"
