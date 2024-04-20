@@ -128,9 +128,9 @@ in
           packages = with pkgs; [
             ripgrep
           ];
-        }
-        // optionalAttrs (cfg.setBuildEnv && (lib.versionOlder config.home.stateVersion "24.05")) {
-          shellAliases.nvim = concatStringsSep " " buildEnv + " nvim";
+          shellAliases = optionalAttrs (cfg.setBuildEnv && (lib.versionOlder config.home.stateVersion "24.05")) {
+            nvim = concatStringsSep " " buildEnv + " nvim";
+          };
         };
 
         programs.neovim = {
@@ -139,7 +139,7 @@ in
           withNodeJs = true;
           withPython3 = true;
           withRuby = true;
-          extraWrapperArgs = optionals (cfg.setBuildEnv && (lib.versionAtLeast config.home.stateVersion  "24.05")) [
+          extraWrapperArgs = optionals (cfg.setBuildEnv && (lib.versionAtLeast config.home.stateVersion "24.05")) [
             "--suffix"
             "CPATH"
             ":"
