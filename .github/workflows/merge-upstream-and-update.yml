@@ -32,22 +32,16 @@ jobs:
           git merge upstream/main --allow-unrelated-histories --no-commit --no-ff
 
           git reset HEAD lazy-lock.json
-          git reset HEAD .github/workflows/update_lockfile.yml
 
           git checkout lazy-lock.json
-          git checkout .github/workflows/update_lockfile.yml
-
-      - name: Run count-new-commits
-        run: |
-          echo "NEW_COMMIT_COUNT=$(git log --oneline --since '24 hours ago' --perl-regexp --author='^((?!github-actions).*)$' | wc -l)" >> "$GITHUB_ENV"
 
       - uses: rhysd/action-setup-vim@v1
-        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
+        if: steps.check_lockfile.outputs.files_exists == 'true'
         with:
           neovim: true
 
       - name: Run lockfile-autoupdate
-        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
+        if: steps.check_lockfile.outputs.files_exists == 'true'
         timeout-minutes: 5
         run: |
           ./scripts/install.sh
@@ -55,14 +49,7 @@ jobs:
           cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
 
       - uses: peter-evans/create-pull-request@v6
-        if: >-
-          ${{
-            (
-              steps.check_lockfile.outputs.files_exists == 'true' &&
-              env.NEW_COMMIT_COUNT > 0
-            ) ||
-            steps.merge-upstream.outcome == 'success'
-          }}
+        if: steps.check_lockfile.outputs.files_exists == 'true' || steps.merge-upstream.outcome == 'success'
         with:
           token: ${{ github.token }}
           commit-message: "chore: auto merge upstream and update lazy-lock.json"
