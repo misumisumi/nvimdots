@@ -1,3 +1,13 @@
+local exception = require("user.configs.exception")
+local null_ls_deps = {
+	"actionlint",
+}
+if not exception.is_nixos() then
+	for k, _ in pairs(exception.null_ls) do
+		table.insert(null_ls_deps, k)
+	end
+end
+
 local settings = {}
 
 -- Example
@@ -23,9 +33,6 @@ settings["treesitter_deps"] = {
 	"terraform",
 }
 
-settings["null_ls_deps"] = {
-	"actionlint",
-	"textlint",
-}
+settings["null_ls_deps"] = null_ls_deps
 
 return settings
