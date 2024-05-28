@@ -47,6 +47,7 @@ jobs:
           ./scripts/install.sh
           nvim --headless "+Lazy! update" +qa
           cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
+          git add lazy-lock.json
 
       - uses: peter-evans/create-pull-request@v6
         if: steps.check_lockfile.outputs.files_exists == 'true' || steps.merge-upstream.outcome == 'success'
