@@ -14,6 +14,5 @@ return function()
 	end
 	return {
 		sources = sources,
-		debug = true,
 	}
 end

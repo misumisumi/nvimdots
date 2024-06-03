@@ -35,4 +35,20 @@ settings["treesitter_deps"] = {
 
 settings["null_ls_deps"] = null_ls_deps
 
+settings["format_opts"] = {
+	format_on_save = true,
+	format_notify = true,
+	format_modifications_only = true,
+	-- format_disabled_dirs = {},
+	format_timeout = 5000,
+	-- server_formatting_block_list = {
+	-- 	lua_ls = true,
+	-- 	tsserver = true,
+	-- 	clangd = true,
+	-- },
+	-- formatter_block_list = {
+	-- 	lua = false,
+	-- },
+}
+
 return settings
