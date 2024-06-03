@@ -6,20 +6,28 @@ function autocmd.nvim_create_augroups(definitions)
 		vim.api.nvim_command("augroup " .. group_name)
 		vim.api.nvim_command("autocmd!")
 		for _, def in ipairs(definition) do
-			local command = table.concat(vim.tbl_flatten({ "autocmd", def }), " ")
+			local command = table.concat(vim.iter({ "autocmd", def }):flatten(), " ")
 			vim.api.nvim_command(command)
 		end
 		vim.api.nvim_command("augroup END")
 	end
 end
 
--- defer setting LSP-related keymaps till LspAttach
+-- Hold off on configuring anything related to the LSP until LspAttach
 local mapping = require("keymap.completion")
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),
 	callback = function(event)
 		if not _G._debugging then
+			-- LSP Keymaps
 			mapping.lsp(event.buf)
+
+			-- LSP Inlay Hints
+			local inlayhints_enabled = require("core.settings").lsp_inlayhints
+			local client = vim.lsp.get_client_by_id(event.data.client_id)
+			if client and client.server_capabilities.inlayHintProvider ~= nil then
+				vim.lsp.inlay_hint.enable(inlayhints_enabled == true, { bufnr = event.buf })
+			end
 		end
 	end,
 })
