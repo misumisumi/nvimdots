@@ -5,15 +5,15 @@ lang["epwalsh/obsidian.nvim"] = {
 	lazy = true,
 	ft = "markdown",
 	cmd = {
+		"ObsidianNewFromTemplate",
+		"ObsidianSearch",
+		"ObsidianTags",
 		"ObsidianDailies",
 		"ObsidianNew",
 		"ObsidianOpen",
-		"ObsidianSearch",
-		"ObsidianTags",
 		"ObsidianToday",
 		"ObsidianTomorrow",
 		"ObsidianYesterday",
-		"ObsidianNewFromTemplate",
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
