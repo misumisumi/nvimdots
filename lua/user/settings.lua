@@ -15,7 +15,6 @@ settings["use_ssh"] = false
 settings["lsp_deps"] = {
 	"bashls",
 	"jsonls",
-	"marksman",
 	"taplo",
 	"terraformls",
 	"texlab",
