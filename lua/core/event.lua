@@ -6,7 +6,7 @@ function autocmd.nvim_create_augroups(definitions)
 		vim.api.nvim_command("augroup " .. group_name)
 		vim.api.nvim_command("autocmd!")
 		for _, def in ipairs(definition) do
-			local command = table.concat(vim.iter({ "autocmd", def }):flatten(), " ")
+			local command = table.concat(vim.iter({ "autocmd", def }):flatten(math.huge):totable(), " ")
 			vim.api.nvim_command(command)
 		end
 		vim.api.nvim_command("augroup END")
@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		local layout = vim.api.nvim_call_function("winlayout", {})
 		if
 			layout[1] == "leaf"
-			and vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(layout[2]) }) == "NvimTree"
+			and vim.bo[vim.api.nvim_win_get_buf(layout[2])].filetype == "NvimTree"
 			and layout[3] == nil
 		then
 			vim.api.nvim_command([[confirm quit]])
