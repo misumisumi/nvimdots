@@ -25,7 +25,6 @@ tool["tyru/open-browser.vim"] = {
 }
 tool["vim-skk/skkeleton"] = {
 	lazy = true,
-    commit="87ad1d1", -- TODO: register_kanatableの仕様が変更されて今の方法での句点の定義ができない？
 	dependencies = {
 		{ "vim-denops/denops.vim" },
 		{ "delphinus/skkeleton_indicator.nvim" },
