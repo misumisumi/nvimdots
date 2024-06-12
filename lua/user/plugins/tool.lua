@@ -1,8 +1,5 @@
 local tool = {}
 
-tool["folke/trouble.nvim"] = {
-	branch = "v2.10.0",
-}
 tool["nvim-neo-tree/neo-tree.nvim"] = {
 	lazy = true,
 	branch = "v3.x",

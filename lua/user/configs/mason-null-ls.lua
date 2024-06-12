@@ -29,11 +29,7 @@ return function()
 			}))
 		end,
 	}
-	if exception.is_nixos() then
-		-- for tool, _ in pairs(exception.null_ls()) do
-		-- 	handlers[tool] = function() end
-		-- end
-	else
+	if not exception.is_nixos() then
 		for tool, setups in pairs(exception.null_ls()) do
 			handlers[tool] = function()
 				for _, setup in pairs(setups) do
@@ -41,7 +37,7 @@ return function()
 				end
 			end
 		end
-	end
+    end
 	return {
 		handlers = handlers,
 	}
