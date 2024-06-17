@@ -37,7 +37,7 @@ return function()
 				end
 			end
 		end
-    end
+	end
 	return {
 		handlers = handlers,
 	}

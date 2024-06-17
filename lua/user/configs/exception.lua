@@ -56,9 +56,9 @@ M.null_ls = function()
 					then
 						vim.api.nvim_create_user_command("TextlintFix", function()
 							if vim.fn.executable("textlint") == 1 then
-					vim.cmd("silent !textlint --fix %")
+								vim.cmd("silent !textlint --fix %")
 							else
-					vim.cmd("silent !node_modules/.bin/textlint --fix %")
+								vim.cmd("silent !node_modules/.bin/textlint --fix %")
 							end
 							vim.notify(
 								string.format("textlint successfully!"),
