@@ -5,6 +5,7 @@ M.is_nixos = function()
 end
 
 M.null_ls = function()
+	local null_ls = require("null-ls")
 	local btns = require("null-ls.builtins")
 	return {
 		commitlint = {
@@ -44,6 +45,7 @@ M.null_ls = function()
 			diagnostics = btns.diagnostics.textlint.with({
 				filetypes = { "markdown", "txt", "tex" },
 				timeout = 15000,
+                method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
 				condition = function(utils)
 					if
 						utils.root_has_file({
