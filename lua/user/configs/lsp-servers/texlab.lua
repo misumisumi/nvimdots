@@ -1,6 +1,13 @@
 return {
 	cmd = { "texlab" },
 	filetypes = { "tex", "plaintex", "bib" },
+	root_dir = require("lspconfig.util").root_pattern(
+		".latexmkrc",
+		".texlabroot",
+		"texlabroot",
+		"Tectonic.toml",
+		".git"
+	),
 	settings = {
 		{
 			texlab = {
