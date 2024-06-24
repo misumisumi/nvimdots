@@ -3,19 +3,20 @@ local global = require("core.global")
 
 -- Create cache dir and data dirs
 local createdir = function()
-	local data_dir = {
-		global.cache_dir .. "backup",
-		global.cache_dir .. "session",
-		global.cache_dir .. "swap",
-		global.cache_dir .. "tags",
-		global.cache_dir .. "undo",
+	local data_dirs = {
+		global.cache_dir .. "/backup",
+		global.cache_dir .. "/session",
+		global.cache_dir .. "/swap",
+		global.cache_dir .. "/tags",
+		global.cache_dir .. "/undo",
 	}
 	-- Only check whether cache_dir exists, this would be enough.
 	if vim.fn.isdirectory(global.cache_dir) == 0 then
-		os.execute("mkdir -p " .. global.cache_dir)
-		for _, v in pairs(data_dir) do
-			if vim.fn.isdirectory(v) == 0 then
-				os.execute("mkdir -p " .. v)
+		---@diagnostic disable-next-line: param-type-mismatch
+		vim.fn.mkdir(global.cache_dir, "p")
+		for _, dir in pairs(data_dirs) do
+			if vim.fn.isdirectory(dir) == 0 then
+				vim.fn.mkdir(dir, "p")
 			end
 		end
 	end
@@ -161,10 +162,8 @@ local load_core = function()
 	require("core.pack")
 	require("keymap")
 
-	local colorscheme = settings.colorscheme
-	local background = settings.background
-	vim.api.nvim_command("set background=" .. background)
-	vim.api.nvim_command("colorscheme " .. colorscheme)
+	vim.api.nvim_set_option_value("background", settings.background, {})
+	vim.cmd.colorscheme(settings.colorscheme)
 end
 
 load_core()
