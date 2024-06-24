@@ -1,4 +1,4 @@
-_G.my_custom_completion = function(arglead, cmdline, cursorpos)
+_G.my_custom_completion = function(arglead, cmdline, cursorpos) -- luacheck: ignore
 	local client = require("obsidian").get_client()
 	local templates_dir = client:templates_dir()
 	if templates_dir == nil then
@@ -28,7 +28,7 @@ return function()
 					attachments = {
 						img_folder = "assets",
 					},
-					note_id_func = function(title)
+					note_id_func = function(title) -- luacheck: ignore
 						-- just use unix timestamp for note id
 						return tostring(os.time())
 					end,
