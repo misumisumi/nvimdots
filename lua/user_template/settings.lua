@@ -1,20 +1,9 @@
+-- Please check `lua/core/settings.lua` to view the full list of configurable settings
 local settings = {}
 
--- Example
+-- Examples
 settings["use_ssh"] = true
-settings["lsp_deps"] = {
-	"bashls",
-	"jsonls",
-	"marksman",
-	"nil_ls",
-	"terraformls",
-	"texlab",
-}
-settings["disabled_plugins"] = {
-	"m4xshen/autoclose.nvim",
-	"nvim-tree/nvim-tree.lua",
-	"karb94/neoscroll.nvim",
-	"dstein64/nvim-scrollview",
-}
+
+settings["colorscheme"] = "catppuccin"
 
 return settings
