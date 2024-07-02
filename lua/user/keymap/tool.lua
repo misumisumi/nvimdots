@@ -67,4 +67,5 @@ return {
 	-- Plugin: vim-translator
 	["v|<leader>tw"] = map_cr("TranslateW"):with_noremap():with_silent():with_desc("Translator: show window"),
 	["v|<leader>tx"] = map_cr("TranslateX"):with_noremap():with_silent():with_desc("Translator: copy clipboard"),
+	["n|<leader><leader>p"] = map_cr("PasteImage"):with_noremap():with_desc("Paste image from system clipboard"),
 }
