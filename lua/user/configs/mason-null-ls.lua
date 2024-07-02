@@ -10,24 +10,6 @@ return function()
 				end,
 			}))
 		end,
-		prettier = function()
-			null_ls.register(btns.formatting.prettier.with({
-				-- filetypes = { "markdown", "txt", "tex" },
-				condition = function(utils)
-					if
-						utils.root_has_file({
-							".textlintrc",
-							".textlintrc.js",
-							".textlintrc.json",
-							".textlintrc.yml",
-							".textlintrc.yaml",
-						})
-					then
-						return false
-					end
-				end,
-			}))
-		end,
 	}
 	if not exception.is_nixos() then
 		for tool, setups in pairs(exception.null_ls()) do

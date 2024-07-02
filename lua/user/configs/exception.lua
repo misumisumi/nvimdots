@@ -45,31 +45,28 @@ M.null_ls = function()
 			diagnostics = btns.diagnostics.textlint.with({
 				filetypes = { "markdown", "txt", "tex" },
 				timeout = 15000,
-                method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+				method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
 				condition = function(utils)
-					if
-						utils.root_has_file({
-							".textlintrc",
-							".textlintrc.js",
-							".textlintrc.json",
-							".textlintrc.yml",
-							".textlintrc.yaml",
-						})
-					then
-						vim.api.nvim_create_user_command("TextlintFix", function()
-							if vim.fn.executable("textlint") == 1 then
-								vim.cmd("silent !textlint --fix %")
-							else
-								vim.cmd("silent !node_modules/.bin/textlint --fix %")
-							end
-							vim.notify(
-								string.format("textlint successfully!"),
-								vim.log.levels.INFO,
-								{ title = "Format Success" }
-							)
-						end, {})
-						return true
-					end
+					return utils.root_has_file({
+						".textlintrc",
+						".textlintrc.js",
+						".textlintrc.json",
+						".textlintrc.yml",
+						".textlintrc.yaml",
+					})
+				end,
+			}),
+			formatting = btns.formatting.textlint.with({
+				filetypes = { "markdown", "txt", "tex" },
+				timeout = 15000,
+				condition = function(utils)
+					return utils.root_has_file({
+						".textlintrc",
+						".textlintrc.js",
+						".textlintrc.json",
+						".textlintrc.yml",
+						".textlintrc.yaml",
+					})
 				end,
 			}),
 		},
