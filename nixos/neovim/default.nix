@@ -160,15 +160,6 @@ in
         shellAliases = optionalAttrs (cfg.setBuildEnv && (versionOlder config.home.stateVersion "24.05")) {
           nvim = concatStringsSep " " buildEnv + " nvim";
         };
-        activation = optionalAttrs cfg.mergeLazyLock {
-          lazyLockActivatioinAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            if [ -f ${config.xdg.configHome}/nvim/lazy-lock.json ]; then
-              ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/lazy-lock.json ${config.xdg.configHome}/nvim/lazy-lock.nix.json > ${config.xdg.configHome}/nvim/lazy-lock.json
-            else
-              ${pkgs.rsync}/bin/rsync --chmod 644 ${config.xdg.configHome}/nvim/lazy-lock.nix.json ${config.xdg.configHome}/nvim/lazy-lock.json
-            fi
-          '';
-        };
       };
       programs.neovim = {
         enable = true;
