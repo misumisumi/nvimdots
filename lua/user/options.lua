@@ -2,6 +2,13 @@ vim.g.editorconfig = 0
 
 -- vim.env.WEZTERM_EXECUTABLEに'mux-server'を含んでいるか判定
 if vim.env.WEZTERM_EXECUTABLE and vim.env.WEZTERM_EXECUTABLE:find("mux%-server") then
+	local function paste()
+		return {
+			vim.fn.split(vim.fn.getreg(""), "\n"),
+			vim.fn.getregtype(""),
+		}
+	end
+
 	vim.g.clipboard = {
 		name = "OSC 52",
 		copy = {
@@ -9,8 +16,8 @@ if vim.env.WEZTERM_EXECUTABLE and vim.env.WEZTERM_EXECUTABLE:find("mux%-server")
 			["*"] = require("vim.ui.clipboard.osc52").copy("*"),
 		},
 		paste = {
-			["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-			["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+			["+"] = paste,
+			["*"] = paste,
 		},
 		cache_enabled = 0,
 	}
