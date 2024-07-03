@@ -18,10 +18,14 @@ return function()
 		local lines = {}
 		for line in io.lines(file) do
 			if string.find(line, "server") == nil then
+				local idx = 1
+				if string.find(line, "encoding") ~= nil then
+					idx = 2
+				end
 				if string.find(line, "FCITX_CONFIG_DIR") == nil then
-					lines[#lines + 1] = vim.split(line, ",", { trimempty = true })[1]:sub(6, -1)
+					lines[#lines + 1] = vim.split(line, ",", { trimempty = true })[idx]:sub(6, -1)
 				else
-					lines[#lines + 1] = vim.split(line, ",", { trimempty = true })[1]
+					lines[#lines + 1] = vim.split(line, ",", { trimempty = true })[idx]
 						:sub(6, -1)
 						:gsub("$FCITX_CONFIG_DIR", fcitx_config_path)
 				end

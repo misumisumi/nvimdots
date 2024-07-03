@@ -31,7 +31,7 @@ return function()
 					notes_subdir = "inbox",
 					daily_notes = {
 						folder = "daily",
-						template = "assets/archetypes/daily.md",
+						template = "daily.md",
 					},
 					templates = {
 						folder = "assets/archetypes",
