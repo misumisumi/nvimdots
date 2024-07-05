@@ -65,7 +65,8 @@ tool["epwalsh/obsidian.nvim"] = {
 		"nvim-lua/plenary.nvim",
 		"delphinus/obsidian-kensaku.nvim",
 	},
-	config = require("user.configs.tool.obsidian"),
+	init = require("user.configs.tool.obsidian").init,
+	config = require("user.configs.tool.obsidian").setup,
 }
 tool["HakonHarnes/img-clip.nvim"] = {
 	lazy = true,

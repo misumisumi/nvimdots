@@ -1,3 +1,4 @@
+local M = {}
 _G.my_custom_completion = function(arglead, cmdline, cursorpos) -- luacheck: ignore
 	local client = require("obsidian").get_client()
 	local templates_dir = client:templates_dir()
@@ -12,7 +13,19 @@ _G.my_custom_completion = function(arglead, cmdline, cursorpos) -- luacheck: ign
 	return result
 end
 
-return function()
+M.init = function()
+	vim.api.nvim_create_autocmd("BufReadPost", {
+		pattern = { "*.md" },
+		callback = function()
+			local root_patterns = { ".obsidian" }
+			if vim.fs.find(root_patterns, { upward = true })[1] ~= nil then
+				vim.opt_local.conceallevel = 1
+			end
+		end,
+	})
+end
+
+M.setup = function()
 	local obsidian = require("obsidian")
 	obsidian.setup({
 		mappings = {
@@ -148,16 +161,6 @@ return function()
 		vim.api.nvim_buf_set_lines(0, 0, 1, false, {})
 	end, {})
 
-	vim.api.nvim_create_autocmd("BufReadPost", {
-		pattern = { "*.md" },
-		callback = function()
-			local root_patterns = { ".obsidian" }
-			if vim.fs.find(root_patterns, { upward = true })[1] ~= nil then
-				vim.opt_local.conceallevel = 1
-			end
-		end,
-	})
-
 	-- vim.api.nvim_create_user_command("ObsidianWeekly", function()
 	-- 	local client = obsidian.get_client()
 	-- 	local utils = require("obsidian.util")
@@ -186,3 +189,5 @@ return function()
 	-- 	vim.api.nvim_buf_set_lines(0, 0, 1, false, {})
 	-- end, {})
 end
+
+return M
