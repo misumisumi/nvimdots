@@ -41,12 +41,44 @@ tool["voldikss/vim-translator"] = {
 	},
 	config = require("user.configs.tool.vim-translator"),
 }
+tool["lambdalisue/kensaku.vim"] = {
+	dependencies = { "vim-denops/denops.vim" },
+}
+tool["epwalsh/obsidian.nvim"] = {
+	version = "*",
+	lazy = true,
+	ft = { "markdown" },
+	cmd = {
+		"ObsidianNewFromTemplate",
+		"ObsidianKensaku",
+		"ObsidianSearch",
+		"ObsidianTags",
+		"ObsidianDailies",
+		"ObsidianNew",
+		"ObsidianOpen",
+		"ObsidianToday",
+		"ObsidianTomorrow",
+		"ObsidianYesterday",
+		"ObsidianWeekly",
+	},
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"delphinus/obsidian-kensaku.nvim",
+	},
+	init = require("user.configs.tool.obsidian").init,
+	config = require("user.configs.tool.obsidian").setup,
+}
+tool["HakonHarnes/img-clip.nvim"] = {
+	lazy = true,
+	cmd = { "PasteImage" },
+}
 tool["nvim-telescope/telescope.nvim"] = {
 	dependencies = {
 		{ "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" },
 		{ "nvim-lua/popup.nvim" },
-		{ "barrett-ruth/telescope-http.nvim" },
+		{ "barrett-ruth/http-codes.nvim" },
 		{ "LukasPietzschmann/telescope-tabs" },
+		{ "Allianaab2m/telescope-kensaku.nvim", dependencies = { "lambdalisue/kensaku.vim" } },
 	},
 }
 

@@ -31,9 +31,12 @@ jobs:
           git fetch upstream
           git merge upstream/main --allow-unrelated-histories --no-commit --no-ff
 
+      - name: Fix conflict
+        id: fix-conflict
+        run: |
           git reset HEAD lazy-lock.json
-
           git checkout lazy-lock.json
+          git commit --no-edit
 
       - uses: rhysd/action-setup-vim@v1
         if: steps.check_lockfile.outputs.files_exists == 'true'
@@ -47,14 +50,16 @@ jobs:
           ./scripts/install.sh
           nvim --headless "+Lazy! update" +qa
           cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
+          curl -L https://raw.githubusercontent.com/ayamir/nvimdots/main/lazy-lock.json -o lazy-lock.upstream.json
+          # refer to the upstream lazy-lock.json and merge common plugins with priority given to the upstream version.
+          jq -s '.[0] as $x | .[1] as $y | $x | to_entries | map(.key as $k | select($y | has($k)) | {($k): $y[$k]}) | add' lazy-lock.json lazy-lock.upstream.json > lazy-lock.tmp.json
+          mv lazy-lock.tmp.json lazy-lock.json
+          rm lazy-lock.upstream.json
 
-      - uses: peter-evans/create-pull-request@v6
-        if: steps.check_lockfile.outputs.files_exists == 'true' || steps.merge-upstream.outcome == 'success'
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: steps.check_lockfile.outputs.files_exists == 'true' || steps.fix-conflict.outcome == 'success'
         with:
-          token: ${{ github.token }}
-          commit-message: "chore: auto merge upstream and update lazy-lock.json"
-          title: "chore: auto merge upstream and update lazy-lock.json"
-          branch: "merge_upstream_and_update_lazy_lock_action"
-          labels: |
-            dependencies
-            automated
+          commit_message: "chore: auto merge upstream and update lazy-lock.json"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
