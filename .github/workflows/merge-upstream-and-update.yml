@@ -29,10 +29,12 @@ jobs:
 
           git remote add upstream https://github.com/ayamir/nvimdots.git
           git fetch upstream
-          git merge upstream/main --allow-unrelated-histories --no-commit --no-ff
+          remote_update=$(git merge upstream/main --allow-unrelated-histories --no-commit --no-ff)
+          echo "remote_update=${remote_update}" >> $GITHUB_OUTPUT
 
       - name: Fix conflict
         id: fix-conflict
+        if: steps.merge-upstream.outputs.remote_update != 'Already up to date.'
         run: |
           git reset HEAD lazy-lock.json
           git checkout lazy-lock.json
@@ -57,7 +59,7 @@ jobs:
           rm lazy-lock.upstream.json
 
       - uses: stefanzweifel/git-auto-commit-action@v5
-        if: steps.check_lockfile.outputs.files_exists == 'true' || steps.fix-conflict.outcome == 'success'
+        if: steps.check_lockfile.outputs.files_exists == 'true' || contains(fromJSON('["success", "skipped"]'), steps.fix-conflict.outcome)
         with:
           commit_message: "chore: auto merge upstream and update lazy-lock.json"
           commit_user_name: "github-actions[bot]"
