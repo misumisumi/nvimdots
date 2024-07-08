@@ -14,12 +14,21 @@ _G.my_custom_completion = function(arglead, cmdline, cursorpos) -- luacheck: ign
 end
 
 M.init = function()
-	vim.api.nvim_create_autocmd("BufReadPost", {
+	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave" }, {
 		pattern = { "*.md" },
 		callback = function()
 			local root_patterns = { ".obsidian" }
 			if vim.fs.find(root_patterns, { upward = true })[1] ~= nil then
 				vim.opt_local.conceallevel = 1
+			end
+		end,
+	})
+	vim.api.nvim_create_autocmd("InsertEnter", {
+		pattern = { "*.md" },
+		callback = function()
+			local root_patterns = { ".obsidian" }
+			if vim.fs.find(root_patterns, { upward = true })[1] ~= nil then
+				vim.opt_local.conceallevel = 0
 			end
 		end,
 	})
