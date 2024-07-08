@@ -1,8 +1,12 @@
 return {
-	mapping = { "jj" },
 	timeout = vim.o.timeoutlen,
-	clear_empty_lines = false,
-	keys = function()
-		return vim.api.nvim_win_get_cursor(0)[2] > 1 and "<esc>l" or "<esc>"
+	k = function()
+		vim.api.nvim_input("<esc>")
+		local current_line = vim.api.nvim_get_current_line()
+		if current_line:match("^%s+j$") then
+			vim.schedule(function()
+				vim.api.nvim_set_current_line("")
+			end)
+		end
 	end,
 }
