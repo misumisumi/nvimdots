@@ -27,7 +27,7 @@ local options = {
 	-- Example
 	autoindent = true,
 	colorcolumn = "80,100",
-	-- fileencodings = "iso-2022-jp,euc-jp,sjis,utf-8",
+	fileencodings = "utf-8,sjis,euc-jp,iso-2022-jp",
 }
 
 return options
