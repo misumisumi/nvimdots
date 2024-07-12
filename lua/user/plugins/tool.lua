@@ -47,9 +47,11 @@ tool["lambdalisue/kensaku.vim"] = {
 tool["epwalsh/obsidian.nvim"] = {
 	version = "*",
 	lazy = true,
+	enabled = require("user.configs.tool.obsidian").enabled,
 	ft = { "markdown" },
 	cmd = {
 		"ObsidianNewFromTemplate",
+		"ObsidianCreate",
 		"ObsidianKensaku",
 		"ObsidianSearch",
 		"ObsidianTags",
