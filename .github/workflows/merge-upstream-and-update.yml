@@ -49,18 +49,32 @@ jobs:
         if: steps.check_lockfile.outputs.files_exists == 'true'
         timeout-minutes: 5
         run: |
-          ./scripts/install.sh
+          cp ./scripts/install.sh ./scripts/install_my_repo.sh
+          sed -i -e "s/ayamir\/nvimdots/misumisumi\/nvimdots/g" ./scripts/install_my_repo.sh
+          ./scripts/install_my_repo.sh
           nvim --headless "+Lazy! update" +qa
           cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
           curl -L https://raw.githubusercontent.com/ayamir/nvimdots/main/lazy-lock.json -o lazy-lock.upstream.json
           # refer to the upstream lazy-lock.json and merge common plugins with priority given to the upstream version.
-          jq -s '.[0] as $x | .[1] as $y | $x | to_entries | map(.key as $k | select($y | has($k)) | {($k): $y[$k]}) | add' lazy-lock.json lazy-lock.upstream.json > lazy-lock.tmp.json
+          jq -s '
+          .[0] as $x
+          | .[1] as $y
+          | $x
+          | to_entries
+          | map(.key as $k
+          |  if ($y | has($k)) then
+              {($k): $y[$k]}
+            else
+              {($k): .value}
+            end)
+          | add' lazy-lock.json lazy-lock.upstream.json > lazy-lock.tmp.json
           mv lazy-lock.tmp.json lazy-lock.json
           rm lazy-lock.upstream.json
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: steps.check_lockfile.outputs.files_exists == 'true' || contains(fromJSON('["success", "skipped"]'), steps.fix-conflict.outcome)
         with:
+          file_pattern: "lazy-lock.json"
           commit_message: "chore: auto merge upstream and update lazy-lock.json"
           commit_user_name: "github-actions[bot]"
           commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
