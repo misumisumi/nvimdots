@@ -4,21 +4,13 @@ M.enabled = function()
 end
 
 M.init = function()
-	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave" }, {
+	vim.api.nvim_create_autocmd("BufReadPost", {
 		pattern = { "*.md" },
 		callback = function()
 			local root_patterns = { ".obsidian" }
 			if vim.fs.find(root_patterns, { upward = true })[1] ~= nil then
+				vim.opt_local.concealcursor = ""
 				vim.opt_local.conceallevel = 1
-			end
-		end,
-	})
-	vim.api.nvim_create_autocmd("InsertEnter", {
-		pattern = { "*.md" },
-		callback = function()
-			local root_patterns = { ".obsidian" }
-			if vim.fs.find(root_patterns, { upward = true })[1] ~= nil then
-				vim.opt_local.conceallevel = 0
 			end
 		end,
 	})
