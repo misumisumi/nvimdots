@@ -4,7 +4,7 @@ M.enabled = function()
 end
 
 M.init = function()
-	vim.api.nvim_create_autocmd("BufReadPost", {
+	vim.api.nvim_create_autocmd("BufRead", {
 		pattern = { "*.md" },
 		callback = function()
 			local root_patterns = { ".obsidian" }
