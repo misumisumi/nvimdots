@@ -25,7 +25,7 @@
   },
   "better-escape.nvim": {
     "branch": "master",
-    "commit": "92b3d7d06ac3405178def49853f81118a12ea051"
+    "commit": "f45b52f8f87792e8659526f23261ffe278a54be5"
   },
   "bigfile.nvim": {
     "branch": "main",
@@ -101,7 +101,7 @@
   },
   "denops.vim": {
     "branch": "main",
-    "commit": "09e64956c2946bba0a060d0a0aaddde106753bd9"
+    "commit": "8c920ec6f190c5c77287f802884bc2004799d062"
   },
   "diffview.nvim": {
     "branch": "main",
@@ -169,7 +169,7 @@
   },
   "kensaku.vim": {
     "branch": "main",
-    "commit": "7ddad2f355a3678597ebbac666e2ee6dda6b9cf3"
+    "commit": "4d62505688dd2f6be410bbcf0bdc96a1787bba5c"
   },
   "lazy.nvim": {
     "branch": "main",
@@ -237,7 +237,7 @@
   },
   "neogen": {
     "branch": "main",
-    "commit": "4a2f68d3eae0018b04132f1d4590e51484043354"
+    "commit": "4b22542b96712a5a901fa909b7dc749251ae1625"
   },
   "neoscroll.nvim": {
     "branch": "master",
@@ -385,7 +385,7 @@
   },
   "skkeleton": {
     "branch": "main",
-    "commit": "0e5a7dc5984e6043ee6d3af81e0d8dbb554dca70"
+    "commit": "a3b59a5ebbad5fc19ec798d6f5ab248f9d7d175c"
   },
   "skkeleton_indicator.nvim": {
     "branch": "v2",
