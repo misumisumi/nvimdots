@@ -25,7 +25,7 @@
   },
   "better-escape.nvim": {
     "branch": "master",
-    "commit": "f45b52f8f87792e8659526f23261ffe278a54be5"
+    "commit": "d337e02b140d909345441392de47a42d283747c1"
   },
   "bigfile.nvim": {
     "branch": "main",
@@ -101,7 +101,7 @@
   },
   "denops.vim": {
     "branch": "main",
-    "commit": "8c920ec6f190c5c77287f802884bc2004799d062"
+    "commit": "eb9ef6a6a43475f9a2b3cdfa682aa6887169a50c"
   },
   "diffview.nvim": {
     "branch": "main",
@@ -169,7 +169,7 @@
   },
   "kensaku.vim": {
     "branch": "main",
-    "commit": "4d62505688dd2f6be410bbcf0bdc96a1787bba5c"
+    "commit": "f7080a9f49132f688f9023cab28ffe3a1f51dee3"
   },
   "lazy.nvim": {
     "branch": "main",
@@ -253,7 +253,7 @@
   },
   "nvim-autopairs": {
     "branch": "master",
-    "commit": "e38c5d837e755ce186ae51d2c48e1b387c4425c6"
+    "commit": "4a39f2dcbe1967ddc3a0f76f863540dd3aa7871a"
   },
   "nvim-bqf": {
     "branch": "main",
@@ -485,7 +485,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "5ac62e0315c6f54f53a7d6da7c485cf8e9cf7240"
+    "commit": "7f6817c0dca7793907785dd5edb01761df13572c"
   },
   "which-key.nvim": {
     "branch": "main",
