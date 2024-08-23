@@ -16,7 +16,7 @@ lang["dhruvasagar/vim-table-mode"] = {
 }
 lang["kiyoon/jupynium.nvim"] = {
 	lazy = true,
-	ft = "python",
+	event = "BufEnter *.ju.*",
 	build = function()
 		if not vim.fn.filereadable("/etc/NIXOS") then
 			return "pip install --user ."

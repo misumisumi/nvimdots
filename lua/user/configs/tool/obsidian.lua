@@ -3,19 +3,6 @@ M.enabled = function()
 	return vim.fn.isdirectory(vim.fn.expand("~/Documents/memopad")) == 1
 end
 
-M.init = function()
-	vim.api.nvim_create_autocmd("BufRead", {
-		pattern = { "*.md" },
-		callback = function()
-			local root_patterns = { ".obsidian" }
-			if vim.fs.find(root_patterns, { upward = true })[1] ~= nil then
-				vim.opt_local.concealcursor = ""
-				vim.opt_local.conceallevel = 1
-			end
-		end,
-	})
-end
-
 M.setup = {
 	mappings = {
 		["<leader><leader>p"] = {
@@ -83,6 +70,9 @@ M.setup = {
 				attachments = {
 					img_folder = "assets",
 				},
+				ui = {
+					enable = false,
+				},
 				note_id_func = function(title) -- luacheck: ignore
 					-- just use unix timestamp for note id
 					return tostring(os.time())
@@ -92,7 +82,6 @@ M.setup = {
 						require("obsidian-kensaku")(client)
 						-- NOTE: https://github.com/epwalsh/obsidian.nvim/issues/467
 						vim.api.nvim_create_user_command("ObsidianCreate", function()
-							vim.opt.conceallevel = 1
 							-- local client = require("obsidian").get_client()
 							local utils = require("obsidian.util")
 							-- prevent Obsidian.nvim from injecting it's own frontmatter table
@@ -111,7 +100,6 @@ M.setup = {
 							client:open_note(note, {
 								sync = true,
 								callback = function(bufnr)
-									vim.opt_local.conceallevel = 1
 									buf = bufnr
 								end,
 							})
@@ -129,7 +117,6 @@ M.setup = {
 									vim.api.nvim_buf_set_lines(buf, 0, 2, false, {})
 								end,
 							})
-							vim.opt.conceallevel = 0
 						end, {})
 						vim.api.nvim_create_user_command("ObsidianSearchAsset", function()
 							local picker = client:picker()
