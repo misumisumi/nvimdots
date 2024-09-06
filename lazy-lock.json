@@ -25,7 +25,7 @@
   },
   "better-escape.nvim": {
     "branch": "master",
-    "commit": "d337e02b140d909345441392de47a42d283747c1"
+    "commit": "bb197e51a91a635deb88630813c3bfc284413697"
   },
   "bigfile.nvim": {
     "branch": "main",
@@ -253,7 +253,7 @@
   },
   "nvim-autopairs": {
     "branch": "master",
-    "commit": "19606af7c039271d5aa96bceff101e7523af3136"
+    "commit": "fd2badc24e675f947162a16c124d395bde80dbd6"
   },
   "nvim-bqf": {
     "branch": "main",
@@ -389,7 +389,7 @@
   },
   "skkeleton": {
     "branch": "main",
-    "commit": "7c33a16fd9f2cbec8f5ec2daeece99b073ef2d91"
+    "commit": "882ec0c10856aadd0c2bf843b9b04cf16272a19b"
   },
   "skkeleton_indicator.nvim": {
     "branch": "v2",
@@ -489,7 +489,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "76ef99f73a5ff10be59836a4af4f928eaa8ad284"
+    "commit": "ec3b648af5092372ddd72404fb5db46b2f78beb5"
   },
   "which-key.nvim": {
     "branch": "main",
