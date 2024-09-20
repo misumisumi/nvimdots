@@ -101,7 +101,7 @@
   },
   "denops.vim": {
     "branch": "main",
-    "commit": "f32f02817729129abb3e093fc21e5160512a5673"
+    "commit": "f9ab988c870023c4f5542b3f17de3250bbfe43cc"
   },
   "diffview.nvim": {
     "branch": "main",
@@ -249,11 +249,11 @@
   },
   "nui.nvim": {
     "branch": "main",
-    "commit": "61574ce6e60c815b0a0c4b5655b8486ba58089a1"
+    "commit": "b58e2bfda5cea347c9d58b7f11cf3012c7b3953f"
   },
   "nvim-autopairs": {
     "branch": "master",
-    "commit": "fd2badc24e675f947162a16c124d395bde80dbd6"
+    "commit": "f158dcb865c36f72c92358f87787dab2c272eaf3"
   },
   "nvim-bqf": {
     "branch": "main",
@@ -389,7 +389,7 @@
   },
   "skkeleton": {
     "branch": "main",
-    "commit": "1cfb8fd95aebfdb7803b52dafe8e5e934f356127"
+    "commit": "1035184420cfff705770a5b04aabe0ed0acb4db8"
   },
   "skkeleton_indicator.nvim": {
     "branch": "v2",
