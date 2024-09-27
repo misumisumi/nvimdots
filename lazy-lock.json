@@ -101,7 +101,7 @@
   },
   "denops.vim": {
     "branch": "main",
-    "commit": "f9ab988c870023c4f5542b3f17de3250bbfe43cc"
+    "commit": "08146a5ba9b0d79ddba46af5f6b3bff2260c4441"
   },
   "diffview.nvim": {
     "branch": "main",
@@ -165,7 +165,7 @@
   },
   "jupynium.nvim": {
     "branch": "master",
-    "commit": "828052ece86a5470f97247f6621e8a577154ee41"
+    "commit": "24e6c681adcb64c755d03f79982c5f8bbc81750d"
   },
   "kensaku.vim": {
     "branch": "main",
@@ -225,7 +225,7 @@
   },
   "neo-tree.nvim": {
     "branch": "v3.x",
-    "commit": "29f7c215332ba95e470811c380ddbce2cebe2af4"
+    "commit": "a77af2e764c5ed4038d27d1c463fa49cd4794e07"
   },
   "neoconf.nvim": {
     "branch": "main",
@@ -281,7 +281,7 @@
   },
   "nvim-hlslens": {
     "branch": "main",
-    "commit": "1db56afda3e85791a14b096e483dfda699dd9163"
+    "commit": "07afd4dd14405ad14b142a501a3abea6ae44b21b"
   },
   "nvim-lspconfig": {
     "branch": "master",
@@ -489,7 +489,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "539a203f19531c6b9d2d1b093ee8911fb7050bbc"
+    "commit": "b9cc11536a4e726c58c4776e9bcecff26fc454cb"
   },
   "which-key.nvim": {
     "branch": "main",
