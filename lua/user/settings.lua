@@ -12,6 +12,7 @@ local settings = {}
 
 -- Example
 settings["use_ssh"] = false
+settings["colorscheme"] = "tokyonight-moon"
 settings["lsp_deps"] = {
 	"bashls",
 	"jsonls",

@@ -1,5 +1,9 @@
 local ui = {}
 
+ui["folke/tokyonight.nvim"] = {
+	lazy = false,
+}
+
 ui["petertriho/nvim-scrollbar"] = {
 	lazy = true,
 	dependencies = {
