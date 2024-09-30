@@ -49,25 +49,17 @@ jobs:
         if: steps.check_lockfile.outputs.files_exists == 'true'
         timeout-minutes: 5
         run: |
-          cp ./scripts/install.sh ./scripts/install_my_repo.sh
-          sed -i -e "s/ayamir\/nvimdots/misumisumi\/nvimdots/g" ./scripts/install_my_repo.sh
-          ./scripts/install_my_repo.sh
+          # obsidianのプラグインを強制的に読み込ませる
+          mkdir -p ${HOME}/Documents/memopad
+          NVIMDIR=${HOME}/.config/nvim
+          mkdir -p ${NVIMDIR}
+          cp -r ./lua ${NVIMDIR}/lua
+          cp init.lua ${NVIMDIR}/init.lua
           nvim --headless "+Lazy! update" +qa
-          cp -pv "${HOME}/.config/nvim/lazy-lock.json" lazy-lock.new.json
+          cp -pv "${NVIMDIR}/lazy-lock.json" lazy-lock.new.json
           curl -L https://raw.githubusercontent.com/ayamir/nvimdots/main/lazy-lock.json -o lazy-lock.upstream.json
           # refer to the upstream lazy-lock.json and merge common plugins with priority given to the upstream version.
-          jq -s '
-          .[0] as $x
-          | .[1] as $y
-          | $x
-          | to_entries
-          | map(.key as $k
-          |  if ($y | has($k)) then
-              {($k): $y[$k]}
-            else
-              {($k): .value}
-            end)
-          | add' lazy-lock.new.json lazy-lock.upstream.json > lazy-lock.json
+          jq -s '.[0] as $x | .[1] as $y | $x | to_entries | map(.key as $k | if ($y | has($k)) then {($k): $y[$k]} else {($k): .value} end) | add' lazy-lock.new.json lazy-lock.upstream.json > lazy-lock.json
           rm lazy-lock.upstream.json lazy-lock.new.json
 
       - uses: stefanzweifel/git-auto-commit-action@v5
