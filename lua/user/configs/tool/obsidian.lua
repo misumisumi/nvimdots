@@ -1,5 +1,6 @@
 local M = {}
 M.enabled = function()
+	-- パスを変えたらgithub workflowのパスも変更すること
 	return vim.fn.isdirectory(vim.fn.expand("~/Documents/memopad")) == 1
 end
 
