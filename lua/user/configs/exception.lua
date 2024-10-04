@@ -47,26 +47,38 @@ M.null_ls = function()
 				timeout = 15000,
 				method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
 				condition = function(utils)
-					return utils.root_has_file({
-						".textlintrc",
-						".textlintrc.js",
-						".textlintrc.json",
-						".textlintrc.yml",
-						".textlintrc.yaml",
-					})
+					if utils.has_file({
+						".textlintdiable",
+					}) then
+						return false
+					else
+						return utils.root_has_file({
+							".textlintrc",
+							".textlintrc.js",
+							".textlintrc.json",
+							".textlintrc.yml",
+							".textlintrc.yaml",
+						})
+					end
 				end,
 			}),
 			formatting = btns.formatting.textlint.with({
 				filetypes = { "markdown", "txt", "tex" },
 				timeout = 15000,
 				condition = function(utils)
-					return utils.root_has_file({
-						".textlintrc",
-						".textlintrc.js",
-						".textlintrc.json",
-						".textlintrc.yml",
-						".textlintrc.yaml",
-					})
+					if utils.has_file({
+						".textlintdiable",
+					}) then
+						return false
+					else
+						return utils.root_has_file({
+							".textlintrc",
+							".textlintrc.js",
+							".textlintrc.json",
+							".textlintrc.yml",
+							".textlintrc.yaml",
+						})
+					end
 				end,
 			}),
 		},
