@@ -245,7 +245,7 @@
   },
   "nvim-autopairs": {
     "branch": "master",
-    "commit": "f158dcb865c36f72c92358f87787dab2c272eaf3"
+    "commit": "ee297f215e95a60b01fde33275cc3c820eddeebe"
   },
   "nvim-bqf": {
     "branch": "main",
@@ -445,7 +445,7 @@
   },
   "tokyonight.nvim": {
     "branch": "main",
-    "commit": "817bb6ffff1b9ce72cdd45d9fcfa8c9cd1ad3839"
+    "commit": "2c85fad417170d4572ead7bf9fdd706057bd73d7"
   },
   "trouble.nvim": {
     "branch": "main",
@@ -485,7 +485,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "b9cc11536a4e726c58c4776e9bcecff26fc454cb"
+    "commit": "fcbaf66887bd19f5d973406848cf2a5ac46bd65e"
   },
   "which-key.nvim": {
     "branch": "main",
