@@ -68,7 +68,10 @@ return function()
 	kanatable["z,"] = { "，" }
 	kanatable["z("] = { "（" }
 	kanatable["z)"] = { "）" }
-	kanatable["z!"] = { "（" }
+	kanatable["z{"] = { "【" }
+	kanatable["z}"] = { "】" }
+	kanatable["z!"] = { "！" }
+	kanatable["z?"] = { "？" }
 	kanatable["z1"] = { "１" }
 	kanatable["z2"] = { "２" }
 	kanatable["z3"] = { "３" }
@@ -79,6 +82,8 @@ return function()
 	kanatable["z8"] = { "８" }
 	kanatable["z9"] = { "９" }
 	kanatable["z0"] = { "０" }
+	kanatable["!"] = { "!" }
+	kanatable["?"] = { "?" }
 
 	for _, t in ipairs(keymaps) do
 		vim.fn["skkeleton#register_keymap"](t[3], t[1], t[2])
