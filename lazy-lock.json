@@ -97,7 +97,7 @@
   },
   "denops.vim": {
     "branch": "main",
-    "commit": "08146a5ba9b0d79ddba46af5f6b3bff2260c4441"
+    "commit": "ce5d290493b29968fd3afa4c1190ea27a876861d"
   },
   "diffview.nvim": {
     "branch": "main",
@@ -485,7 +485,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "fcbaf66887bd19f5d973406848cf2a5ac46bd65e"
+    "commit": "f8b84dc1583698634a79bcbd05c4d06e2de427b2"
   },
   "which-key.nvim": {
     "branch": "main",
