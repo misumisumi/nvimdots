@@ -289,7 +289,7 @@
   },
   "nvim-scrollbar": {
     "branch": "main",
-    "commit": "d09f14aa16c9f2748e77008f9da7b1f76e4e7b85"
+    "commit": "6994eb9f73d5fdc36ee2c8717940e8c853e51a49"
   },
   "nvim-spectre": {
     "branch": "master",
@@ -381,7 +381,7 @@
   },
   "skkeleton": {
     "branch": "main",
-    "commit": "438737ec49bcf1303521bdcccb5e06ced7b60c5e"
+    "commit": "2cdd414c1bfa8c363505b8dfc9f50ef2f446ea61"
   },
   "skkeleton_indicator.nvim": {
     "branch": "v2",
@@ -485,7 +485,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "f8b84dc1583698634a79bcbd05c4d06e2de427b2"
+    "commit": "4dd3be5cc4e8f6ee7401e303a8211efb4d91bcf6"
   },
   "which-key.nvim": {
     "branch": "main",
