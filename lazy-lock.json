@@ -97,7 +97,7 @@
   },
   "denops.vim": {
     "branch": "main",
-    "commit": "ce5d290493b29968fd3afa4c1190ea27a876861d"
+    "commit": "3a38e081f922e0134671236edd3e6dcbb251d10c"
   },
   "diffview.nvim": {
     "branch": "main",
@@ -445,7 +445,7 @@
   },
   "tokyonight.nvim": {
     "branch": "main",
-    "commit": "2c85fad417170d4572ead7bf9fdd706057bd73d7"
+    "commit": "2e1daa1d164ad8cc3e99b44ca68e990888a66038"
   },
   "trouble.nvim": {
     "branch": "main",
@@ -485,7 +485,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "4dd3be5cc4e8f6ee7401e303a8211efb4d91bcf6"
+    "commit": "f59b2784e8e4a2cce741cc697b403428af4cf131"
   },
   "which-key.nvim": {
     "branch": "main",
