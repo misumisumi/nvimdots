@@ -1,5 +1,17 @@
+local forward_search_tbl = function()
+	if require("core.global").is_windows then
+		return {
+			args = { "-reuse-instance", "%p", "-forward-search", "%f", "%l" },
+			executable = require("core.global").home .. "/AppData/Local/SumatraPDF/SumatraPDF.exe",
+		}
+	else
+		return {
+			args = { "--synctex-forward", "%l:1:%f", "%p" },
+			executable = "zathura",
+		}
+	end
+end
 return {
-	-- cmd = { "texlab" },
 	cmd = { "texlab", "-vv", "--log-file=./texlab.log" },
 	filetypes = { "tex", "plaintex", "bib" },
 	root_dir = require("lspconfig.util").root_pattern(
@@ -26,19 +38,7 @@ return {
 			},
 			diagnosticsDelay = 300,
 			formatterLineLength = 80,
-			forwardSearch = function()
-				if require("core.global").is_windows then
-					return {
-						args = { "-reuse-instance", "%p", "-forward-search", "%f", "%l" },
-						executable = require("core.global").home .. "/AppData/Local/SumatraPDF/SumatraPDF.exe",
-					}
-				else
-					return {
-						args = { "--synctex-forward", "%l:1:%f", "%p" },
-						executable = "zathura",
-					}
-				end
-			end,
+			forwardSearch = forward_search_tbl(),
 			latexFormatter = "latexindent",
 			latexindent = {
 				modifyLineBreaks = false,
