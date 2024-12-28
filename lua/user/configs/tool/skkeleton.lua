@@ -43,7 +43,6 @@ return function()
 		skkServerReqEnc = "utf-8",
 		skkServerResEnc = "utf-8",
 		sources = { "skk_dictionary", "skk_server" },
-		usePopup = true,
 		userDictionary = global.cache_dir .. "skkeleton",
 	}
 	vim.fn["skkeleton#config"](opts)
