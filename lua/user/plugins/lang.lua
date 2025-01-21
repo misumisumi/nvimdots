@@ -5,11 +5,6 @@ lang["chrisbra/csv.vim"] = {
 	ft = "csv",
 	config = require("user.configs.lang.csv"),
 }
-lang["lervag/vimtex"] = {
-	lazy = true,
-	ft = "tex",
-	config = require("user.configs.lang.vimtex"),
-}
 lang["dhruvasagar/vim-table-mode"] = {
 	lazy = true,
 	ft = "markdown",
