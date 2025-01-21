@@ -33,7 +33,7 @@ return {
 				onSave = false,
 			},
 			chktex = {
-				onEdit = true,
+				onEdit = false,
 				onOpenAndSave = true,
 			},
 			diagnosticsDelay = 300,
