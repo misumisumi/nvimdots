@@ -19,5 +19,10 @@ lang["kiyoon/jupynium.nvim"] = {
 	end,
 	opts = require("user.configs.lang.jupynium"),
 }
+lang["lervag/vimtex"] = {
+	lazy = true,
+	ft = { "tex", "bib", "plaintex" },
+	config = require("user.configs.lang.vimtex"),
+}
 
 return lang
