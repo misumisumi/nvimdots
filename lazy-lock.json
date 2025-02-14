@@ -165,7 +165,7 @@
   },
   "jupynium.nvim": {
     "branch": "master",
-    "commit": "b0b71577c6e4a613b6a4180068dd0b2de0659e52"
+    "commit": "22fdc6c1161abe4e46de083aa0702f90970258a9"
   },
   "kensaku.vim": {
     "branch": "main",
@@ -245,7 +245,7 @@
   },
   "nvim-autopairs": {
     "branch": "master",
-    "commit": "3d02855468f94bf435db41b661b58ec4f48a06b7"
+    "commit": "68f0e5c3dab23261a945272032ee6700af86227a"
   },
   "nvim-bqf": {
     "branch": "main",
@@ -377,7 +377,7 @@
   },
   "skkeleton": {
     "branch": "main",
-    "commit": "8bb1b8782227291c8cbe2aa62a9af732557690cc"
+    "commit": "f1f0586c69d84c6ee5f3e5a4ca76cc188161b944"
   },
   "skkeleton_indicator.nvim": {
     "branch": "v2",
@@ -441,7 +441,7 @@
   },
   "tokyonight.nvim": {
     "branch": "main",
-    "commit": "dca4adba7dc5f09302a00b0e76078d54d82d2658"
+    "commit": "84ea0b5f4651afdf50ececaf6f110fe9d9dc9458"
   },
   "trouble.nvim": {
     "branch": "main",
@@ -481,7 +481,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "dfaf26c2cafddf61963ebeff28437352002691ac"
+    "commit": "10c6c1672919db9d0687e5cb74d613dc811b1684"
   },
   "which-key.nvim": {
     "branch": "main",
