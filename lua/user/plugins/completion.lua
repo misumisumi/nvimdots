@@ -8,6 +8,10 @@ completion["windwp/nvim-autopairs"] = {
 completion["neovim/nvim-lspconfig"] = {
 	dependencies = {
 		{
+			"zapling/mason-lock.nvim",
+			opts = require("user.configs.completion.mason-lock"),
+		},
+		{
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			opts = require("user.configs.completion.mason-tool-installer"),
 		},
