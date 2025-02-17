@@ -45,6 +45,11 @@ jobs:
         with:
           neovim: true
 
+      - uses: denoland/setup-deno@v2
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        with:
+          deno-version: v2.x
+
       - name: Run lockfile-autoupdate
         if: steps.check_lockfile.outputs.files_exists == 'true'
         timeout-minutes: 5
@@ -55,12 +60,17 @@ jobs:
           mkdir -p ${NVIMDIR}
           cp -r ./lua ${NVIMDIR}/lua
           cp init.lua ${NVIMDIR}/init.lua
+          # プラグインのアップデート
           nvim --headless "+Lazy! update" +qa
           cp -pv "${NVIMDIR}/lazy-lock.json" lazy-lock.new.json
           curl -L https://raw.githubusercontent.com/ayamir/nvimdots/main/lazy-lock.json -o lazy-lock.upstream.json
           # refer to the upstream lazy-lock.json and merge common plugins with priority given to the upstream version.
-          jq -s '.[0] as $x | .[1] as $y | $x | to_entries | map(.key as $k | if ($y | has($k)) then {($k): $y[$k]} else {($k): .value} end) | add' lazy-lock.new.json lazy-lock.upstream.json > lazy-lock.json
+          jq -s '.[0] * .[1]' lazy-lock.new.json lazy-lock.upstream.json > lazy-lock.json
           rm lazy-lock.upstream.json lazy-lock.new.json
+          # mason管理のパッケージのアップデート
+          nvim --headless "+MasonToolsInstallSync" +qa
+          nvim --headless "+MasonLock" +qa
+          cp -pv "${NVIMDIR}/mason-lock.json" mason-lock.json
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: steps.check_lockfile.outputs.files_exists == 'true' || contains(fromJSON('["success", "skipped"]'), steps.fix-conflict.outcome)
