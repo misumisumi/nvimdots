@@ -165,7 +165,7 @@
   },
   "jupynium.nvim": {
     "branch": "master",
-    "commit": "22fdc6c1161abe4e46de083aa0702f90970258a9"
+    "commit": "4086e40f5ab3b8b74330c5a69a26791953da5cd2"
   },
   "kensaku.vim": {
     "branch": "main",
@@ -199,6 +199,10 @@
     "branch": "master",
     "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee"
   },
+  "mason-lock.nvim": {
+    "branch": "main",
+    "commit": "86614f76c3442fba1c5c8d79aa1efcb3ad69de1c"
+  },
   "mason-lspconfig.nvim": {
     "branch": "main",
     "commit": "f75e877f5266e87523eb5a18fcde2081820d087b"
@@ -225,7 +229,7 @@
   },
   "neo-tree.nvim": {
     "branch": "v3.x",
-    "commit": "5d172e8315444dbc32867d1c7b04d8e7e68ec4e1"
+    "commit": "e96fd85bf18bc345dab332b345098fa5460dffac"
   },
   "neoconf.nvim": {
     "branch": "main",
@@ -233,7 +237,7 @@
   },
   "neogen": {
     "branch": "main",
-    "commit": "d633d2ef572479792f6a09665fe5e897ed49f85c"
+    "commit": "05d754004da8c89115b291f2a23ca530a8cac8fd"
   },
   "none-ls.nvim": {
     "branch": "main",
@@ -441,7 +445,7 @@
   },
   "tokyonight.nvim": {
     "branch": "main",
-    "commit": "84ea0b5f4651afdf50ececaf6f110fe9d9dc9458"
+    "commit": "057ef5d260c1931f1dffd0f052c685dcd14100a3"
   },
   "trouble.nvim": {
     "branch": "main",
@@ -481,7 +485,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "10c6c1672919db9d0687e5cb74d613dc811b1684"
+    "commit": "63ae2e94b0fabc6bdad0a685c1ef0a7e0705fe7b"
   },
   "which-key.nvim": {
     "branch": "main",
@@ -490,5 +494,21 @@
   "wilder.nvim": {
     "branch": "master",
     "commit": "679f348dc90d80ff9ba0e7c470c40a4d038dcecf"
+  },
+  "autoclose.nvim": {
+    "branch": "main",
+    "commit": "b2077aa2c83df7ebc19b2a20a3a0654b24ae9c8f"
+  },
+  "neoscroll.nvim": {
+    "branch": "master",
+    "commit": "f957373912e88579e26fdaea4735450ff2ef5c9c"
+  },
+  "nvim-scrollview": {
+    "branch": "main",
+    "commit": "e8ad0e0f9c38c1bf3b03e3266cb6ecf3967d6e47"
+  },
+  "nvim-tree.lua": {
+    "branch": "master",
+    "commit": "70825f23db61ecd900c4cfea169bffe931926a9d"
   }
 }
