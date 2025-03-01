@@ -52,7 +52,8 @@ jobs:
 
       - name: Run lockfile-autoupdate
         if: steps.check_lockfile.outputs.files_exists == 'true'
-        timeout-minutes: 5
+        timeout-minutes: 15
+        continue-on-error: true
         run: |
           # obsidianのプラグインを強制的に読み込ませる
           mkdir -p ${HOME}/Documents/memopad
@@ -68,7 +69,7 @@ jobs:
           jq -s '.[0] * .[1]' lazy-lock.new.json lazy-lock.upstream.json > lazy-lock.json
           rm lazy-lock.upstream.json lazy-lock.new.json
           # mason管理のパッケージのアップデート
-          nvim --headless "+MasonToolsInstallSync" +qa
+          nvim --headless "+MasonToolsInstallSync" +qa || echo "Some mason tools installation fails"
           nvim --headless "+MasonLock" +qa
           cp -pv "${NVIMDIR}/mason-lock.json" mason-lock.json
 
