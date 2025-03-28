@@ -153,7 +153,7 @@
   },
   "http-codes.nvim": {
     "branch": "main",
-    "commit": "a610788dff2fb5df05b230d73a926c8dc3173c16"
+    "commit": "77aea3a73d5f3134089941ebf6d4172af34a4a8d"
   },
   "img-clip.nvim": {
     "branch": "main",
@@ -213,7 +213,7 @@
   },
   "mason-tool-installer.nvim": {
     "branch": "main",
-    "commit": "5639d58a3d11ff7c05c8e31e159bfedae55d7961"
+    "commit": "98767d37f8e5255a5111fc1e3163232d4dc07bda"
   },
   "mason.nvim": {
     "branch": "main",
@@ -277,7 +277,7 @@
   },
   "nvim-hlslens": {
     "branch": "main",
-    "commit": "e22f8448b571b56d6140427e27e02406bcf4e059"
+    "commit": "00b9c7359eaaa4804a9be943ea46bc64e6d2e065"
   },
   "nvim-lspconfig": {
     "branch": "master",
@@ -297,7 +297,7 @@
   },
   "nvim-surround": {
     "branch": "main",
-    "commit": "6c54643ef42016b744888b06d2381abd23f9b7ea"
+    "commit": "caf6f633d4d77a29b6e265b560c5a035d171a913"
   },
   "nvim-treehopper": {
     "branch": "master",
@@ -485,7 +485,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "ffd09d8493712ac8c2c570f8d5370b0572b6c5f6"
+    "commit": "528c0671d4d579e1ce126e8958b388a67586d282"
   },
   "which-key.nvim": {
     "branch": "main",
