@@ -165,7 +165,7 @@
   },
   "jupynium.nvim": {
     "branch": "master",
-    "commit": "4086e40f5ab3b8b74330c5a69a26791953da5cd2"
+    "commit": "144ab6e46d2b42264c16a4f3c780d88feb0a89e8"
   },
   "kensaku.vim": {
     "branch": "main",
@@ -249,7 +249,7 @@
   },
   "nvim-autopairs": {
     "branch": "master",
-    "commit": "2a406cdd8c373ae7fe378a9e062a5424472bd8d8"
+    "commit": "4d74e75913832866aa7de35e4202463ddf6efd1b"
   },
   "nvim-bqf": {
     "branch": "main",
@@ -485,7 +485,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "a531f6bf9ce61172e4ea8eea2ecbf59fd08c232a"
+    "commit": "bb4e401f97caf29873382c3b7dcb64369c928b3d"
   },
   "which-key.nvim": {
     "branch": "main",
