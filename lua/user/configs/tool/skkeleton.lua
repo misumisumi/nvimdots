@@ -58,7 +58,6 @@ return function()
 		{ "<C-q>", "hankatakana", "input" },
 		{ "<C-x>", "cancel", "henkan" },
 		{ "<C-x>", "purgeCandidate", "input" },
-		{ "L", "hankatakana", "input" },
 	}
 	local kanatable = {}
 	kanatable["jj"] = "escape"
