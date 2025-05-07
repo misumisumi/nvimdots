@@ -49,6 +49,7 @@ M.null_ls = function()
 				condition = function(utils)
 					if utils.has_file({
 						".textlintdiable",
+						".textlintignore",
 					}) then
 						return false
 					else
@@ -68,6 +69,7 @@ M.null_ls = function()
 				condition = function(utils)
 					if utils.has_file({
 						".textlintdiable",
+						".textlintignore",
 					}) then
 						return false
 					else
