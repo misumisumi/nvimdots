@@ -8,6 +8,11 @@ require("keymap.helpers")
 
 local mappings = {
 	plugins = {
+		-- Plugin: vim-fugitive
+		["n|gps"] = map_cr("G push"):with_noremap():with_silent():with_desc("git: Push"),
+		["n|gpl"] = map_cr("G pull"):with_noremap():with_silent():with_desc("git: Pull"),
+		["n|<leader>gG"] = map_cu("Git"):with_noremap():with_silent():with_desc("git: Open git-fugitive"),
+
 		-- Plugin: edgy
 		["n|<C-n>"] = map_callback(function()
 				require("edgy").toggle("left")
@@ -15,11 +20,6 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("filetree: Toggle"),
-
-		-- Plugin: vim-fugitive
-		["n|gps"] = map_cr("G push"):with_noremap():with_silent():with_desc("git: Push"),
-		["n|gpl"] = map_cr("G pull"):with_noremap():with_silent():with_desc("git: Pull"),
-		["n|<leader>gG"] = map_cu("Git"):with_noremap():with_silent():with_desc("git: Open git-fugitive"),
 
 		-- Plugin: nvim-tree
 		["n|<leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent():with_desc("filetree: Find file"),
