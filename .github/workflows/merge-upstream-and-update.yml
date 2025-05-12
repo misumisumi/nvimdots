@@ -1,0 +1,97 @@
+name: auto merge upstream
+on:
+  workflow_dispatch: # allows manual triggering
+  schedule:
+    - cron: "0 17 * * 5" # runs weekly on Saturday at 02:00 (JST)
+
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  auto-merge-upstream:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch: [0.11, feat/ai-chat]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: andstor/file-existence-action@v3
+        id: check_lockfile
+        with:
+          files: "lazy-lock.json"
+
+      - name: Merge upstream
+        id: merge-upstream
+        continue-on-error: true
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+          git remote add upstream https://github.com/ayamir/nvimdots.git
+          git fetch upstream
+          remote_update=$(git merge upstream/main --allow-unrelated-histories --no-commit --no-ff)
+          echo "remote_update=${remote_update}" >> "$GITHUB_OUTPUT"
+
+      - name: Fix conflict
+        id: fix-conflict
+        if: steps.merge-upstream.outputs.remote_update != 'Already up to date.'
+        run: |
+          git reset HEAD lazy-lock.json
+          git checkout lazy-lock.json
+          git commit --no-edit
+
+      - uses: rhysd/action-setup-vim@v1
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        with:
+          neovim: true
+
+      - uses: denoland/setup-deno@v2
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        with:
+          deno-version: v2.x
+
+      - name: Run lockfile-autoupdate
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        timeout-minutes: 15
+        continue-on-error: true
+        run: |
+          # obsidianのプラグインを強制的に読み込ませる
+          mkdir -p "${HOME}/Documents/memopad"
+          NVIMDIR="${HOME}/.config/nvim"
+          mkdir -p "${NVIMDIR}"
+          cp -r ./lua "${NVIMDIR}/lua"
+          cp init.lua "${NVIMDIR}/init.lua"
+
+          # 対象のlockファイルについて、upstreamから持ってきてマージする
+          mergeUpstreamLock () {
+            target=$1
+            branch=${2:-main}
+
+            cp "${target}" "${target%.*}.origin.${target##.*}"
+            curl -L "https://raw.githubusercontent.com/ayamir/nvimdots/${branch}/${target}" -o "${target%.*}.upstream.${target##.*}"
+            # デフォルトのプラグインについては、上流を尊重する
+            jq -s '.[0] * .[1]' "${target%.*}.origin.${target##.*}" "${target%.*}.upstream.${target##.*}" > "${target}"
+            rm "${target%.*}.origin.${target##.*}" "${target%.*}.upstream.${target##.*}"
+          }
+
+          # プラグインのアップデート
+          nvim --headless "+Lazy! update" +qa
+          mergeUpstreamLock lazy-lock.json ${{ matrix.branch }}
+
+          # mason管理のパッケージのアップデート
+          nvim --headless "+MasonToolsInstallSync" +qa || echo "Some mason tools installation fails"
+          nvim --headless "+MasonLock" +qa
+          cp -pv "${NVIMDIR}/mason-lock.json" mason-lock.json
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: steps.check_lockfile.outputs.files_exists == 'true' || contains(fromJSON('["success", "skipped"]'), steps.fix-conflict.outcome)
+        with:
+          branch: ${{ matrix.branch }}
+          file_pattern: "lazy-lock.json"
+          commit_message: "chore: auto merge upstream and update lazy-lock.json"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"

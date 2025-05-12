@@ -354,7 +354,7 @@ function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 					setup_callback(opts)
 				-- Replace base config if the returned user config is a function
 				elseif type(user_config) == "function" then
-					local user_opts = user_config(opts)
+					local user_opts = user_config()
 					if type(user_opts) == "table" then
 						setup_callback(user_opts)
 					end
