@@ -10,6 +10,9 @@ permissions:
 jobs:
   auto-merge-upstream:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch: [0.11, feat/ai-chat]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,7 +33,7 @@ jobs:
           git remote add upstream https://github.com/ayamir/nvimdots.git
           git fetch upstream
           remote_update=$(git merge upstream/main --allow-unrelated-histories --no-commit --no-ff)
-          echo "remote_update=${remote_update}" >> $GITHUB_OUTPUT
+          echo "remote_update=${remote_update}" >> "$GITHUB_OUTPUT"
 
       - name: Fix conflict
         id: fix-conflict
@@ -56,18 +59,28 @@ jobs:
         continue-on-error: true
         run: |
           # obsidianのプラグインを強制的に読み込ませる
-          mkdir -p ${HOME}/Documents/memopad
-          NVIMDIR=${HOME}/.config/nvim
-          mkdir -p ${NVIMDIR}
-          cp -r ./lua ${NVIMDIR}/lua
-          cp init.lua ${NVIMDIR}/init.lua
+          mkdir -p "${HOME}/Documents/memopad"
+          NVIMDIR="${HOME}/.config/nvim"
+          mkdir -p "${NVIMDIR}"
+          cp -r ./lua "${NVIMDIR}/lua"
+          cp init.lua "${NVIMDIR}/init.lua"
+
+          # 対象のlockファイルについて、upstreamから持ってきてマージする
+          mergeUpstreamLock () {
+            target=$1
+            branch=${2:-main}
+
+            cp "${target}" "${target%.*}.origin.${target##.*}"
+            curl -L "https://raw.githubusercontent.com/ayamir/nvimdots/${branch}/${target}" -o "${target%.*}.upstream.${target##.*}"
+            # デフォルトのプラグインについては、上流を尊重する
+            jq -s '.[0] * .[1]' "${target%.*}.origin.${target##.*}" "${target%.*}.upstream.${target##.*}" > "${target}"
+            rm "${target%.*}.origin.${target##.*}" "${target%.*}.upstream.${target##.*}"
+          }
+
           # プラグインのアップデート
           nvim --headless "+Lazy! update" +qa
-          cp -pv "${NVIMDIR}/lazy-lock.json" lazy-lock.new.json
-          curl -L https://raw.githubusercontent.com/ayamir/nvimdots/main/lazy-lock.json -o lazy-lock.upstream.json
-          # refer to the upstream lazy-lock.json and merge common plugins with priority given to the upstream version.
-          jq -s '.[0] * .[1]' lazy-lock.new.json lazy-lock.upstream.json > lazy-lock.json
-          rm lazy-lock.upstream.json lazy-lock.new.json
+          mergeUpstreamLock lazy-lock.json ${{ matrix.branch }}
+
           # mason管理のパッケージのアップデート
           nvim --headless "+MasonToolsInstallSync" +qa || echo "Some mason tools installation fails"
           nvim --headless "+MasonLock" +qa
@@ -76,6 +89,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: steps.check_lockfile.outputs.files_exists == 'true' || contains(fromJSON('["success", "skipped"]'), steps.fix-conflict.outcome)
         with:
+          branch: ${{ matrix.branch }}
           file_pattern: "lazy-lock.json"
           commit_message: "chore: auto merge upstream and update lazy-lock.json"
           commit_user_name: "github-actions[bot]"
