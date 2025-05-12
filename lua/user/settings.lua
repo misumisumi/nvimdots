@@ -40,4 +40,7 @@ settings["format_notify"] = true
 settings["format_modifications_only"] = false
 settings["format_timeout"] = 5000
 
+settings["use_copilot"] = false
+settings["use_chat"] = true
+
 return settings
