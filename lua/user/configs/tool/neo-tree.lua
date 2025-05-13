@@ -8,6 +8,7 @@ return function()
 		popup_border_style = "rounded",
 		enable_git_status = true,
 		enable_diagnostics = true,
+		open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "edgy" },
 		source_selector = {
 			winbar = true,
 			statusline = false,

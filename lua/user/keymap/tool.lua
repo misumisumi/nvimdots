@@ -7,8 +7,15 @@ return {
 	-- Remove default keymap
 	["n|<leader>nr"] = "",
 
-	-- Plugin: Neotree
-	["n|<leader>e"] = map_cr("Neotree toggle"):with_noremap():with_silent():with_desc("filetree: Toggle"),
+	-- Plugin: Neotree with edgy
+	-- ["n|<leader>e"] = map_cr("Neotree toggle position=left"):with_noremap():with_silent():with_desc("filetree: Toggle"),
+	-- Plugin: edgy
+	["n|<leader>e"] = map_callback(function()
+			require("edgy").toggle("left")
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("filetree: Toggle"),
 	-- Plugin: open-browser
 	["n|<leader>bo"] = map_cmd("<Plug>(openbrowser-smart-search)")
 		:with_noremap()
