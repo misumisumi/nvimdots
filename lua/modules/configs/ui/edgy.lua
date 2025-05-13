@@ -35,14 +35,14 @@ return function()
 				ft = "NvimTree",
 				pinned = true,
 				collapsed = false,
-				size = { height = 0.6, width = 40 },
+				size = { height = 0.6, width = 0.15 },
 				open = "NvimTreeOpen",
 			},
 			{
 				ft = "trouble",
 				pinned = true,
 				collapsed = false,
-				size = { height = 0.4, width = 40 },
+				size = { height = 0.4, width = 0.15 },
 				open = "Trouble symbols toggle win.position=right",
 				filter = trouble_filter("right"),
 			},
@@ -64,6 +64,15 @@ return function()
 				filter = function(buf)
 					return vim.bo[buf].buftype == "help"
 				end,
+			},
+		},
+		right = {
+			{
+				ft = "codecompanion",
+				pinned = true,
+				collapsed = false,
+				size = { width = 0.25 },
+				open = "CodeCompanionChat Toggle",
 			},
 		},
 	})
