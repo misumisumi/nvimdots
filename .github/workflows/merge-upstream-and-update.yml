@@ -31,8 +31,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
 
           git remote add upstream https://github.com/ayamir/nvimdots.git
-          git fetch upstream
-          remote_update=$(git merge upstream/main --allow-unrelated-histories --no-commit --no-ff)
+          git fetch upstream 
+          remote_update=$(git merge upstream/${{ matrix.branch }} --allow-unrelated-histories --no-commit --no-ff)
           echo "remote_update=${remote_update}" >> "$GITHUB_OUTPUT"
 
       - name: Fix conflict
