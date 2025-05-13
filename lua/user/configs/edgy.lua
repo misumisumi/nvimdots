@@ -31,5 +31,4 @@ return {
 			},
 		}
 	end,
-	exit_when_last = true,
 }

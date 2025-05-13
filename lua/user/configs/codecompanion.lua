@@ -1,4 +1,9 @@
-local icons = { aichat = require("modules.utils.icons").get("aichat", true) }
+local icons = {
+	aichat = {
+		Copilot = "",
+		Me = "",
+	},
+}
 
 return {
 	opts = {
@@ -12,7 +17,7 @@ return {
 	},
 	strategies = {
 		chat = {
-			adapter = "copilot",
+			adapter = "gemini",
 			roles = {
 				llm = function(adapter)
 					return icons.aichat.Copilot .. " CodeCompanion (" .. adapter.formatted_name .. ")"
@@ -37,17 +42,18 @@ return {
 				},
 			})
 		end,
-		-- gemini = function()
-		-- 	return require("codecompanion.adapters").extend("gemini", {
-		--         env = {
-		--             api_key = ""
-		--         },
-		-- 		schema = {
-		-- 			model = {
-		-- 				default = "gemini-2.5-flash-preview-04-1",
-		-- 			},
-		-- 		},
-		-- 	})
-		-- end,
+		gemini = function()
+			return require("codecompanion.adapters").extend("gemini", {
+				env = {
+					api_key = "cmd:sops decrypt --extract '[\"gemini\"]' ~/.config/codecompanion/api-keys.yaml 2>/dev/null",
+				},
+				schema = {
+					model = {
+						-- default = "gemini-2.5-flash-preview-04-17",
+						default = "gemini-2.0-flash",
+					},
+				},
+			})
+		end,
 	},
 }
