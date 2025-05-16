@@ -15,7 +15,7 @@ return {
 				pinned = true,
 				collapsed = false,
 				size = { height = 0.6, width = 40 },
-				open = "Neotree toggle position=left",
+				open = "Neotree toggle position=right",
 			},
 			{
 				ft = "trouble",
@@ -28,6 +28,17 @@ return {
 					end
 				end,
 				filter = trouble_filter("right"),
+			},
+		}
+	end,
+	right = function()
+		return {
+			{
+				ft = "codecompanion",
+				pinned = true,
+				collapsed = false,
+				size = { width = 0.25 },
+				open = "CodeCompanionChat Toggle",
 			},
 		}
 	end,

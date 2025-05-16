@@ -28,6 +28,7 @@ local options = {
 	autoindent = true,
 	colorcolumn = "80,100",
 	fileencodings = "utf-8,sjis,euc-jp,iso-2022-jp",
+	exrc = true,
 }
 
 return options

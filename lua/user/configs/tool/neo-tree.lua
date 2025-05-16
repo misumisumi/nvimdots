@@ -92,39 +92,8 @@ return function()
 				["V"] = "vsplit_with_window_picker",
 				["t"] = "open_tabnew",
 				["C"] = "close_node",
+				["Z"] = "expand_all_nodes",
 				["z"] = "close_all_nodes",
-				-- ["Z"] = "expand_all_nodes",
-				["n"] = {
-					"add",
-					-- some commands may take optional config options, see `:h neo-tree-mappings` for details
-					config = {
-						show_path = "relative",
-					},
-				},
-				["N"] = {
-					"add_directory",
-					config = {
-						show_path = "relative",
-					},
-				},
-				["dd"] = "delete",
-				["r"] = "rename",
-				["y"] = "copy_to_clipboard",
-				["x"] = "cut_to_clipboard",
-				["p"] = "paste_from_clipboard",
-				-- ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
-				["c"] = {
-					"copy",
-					config = {
-						show_path = "relative",
-					},
-				},
-				["m"] = {
-					"move",
-					config = {
-						show_path = "relative",
-					},
-				},
 				["q"] = "close_window",
 				["R"] = "refresh",
 				["?"] = "show_help",
@@ -167,6 +136,38 @@ return function()
 					["<c-x>"] = "clear_filter",
 					["[g"] = "prev_git_modified",
 					["]g"] = "next_git_modified",
+					-- ["Z"] = "expand_all_nodes",
+					["n"] = {
+						"add",
+						-- some commands may take optional config options, see `:h neo-tree-mappings` for details
+						config = {
+							show_path = "relative",
+						},
+					},
+					["N"] = {
+						"add_directory",
+						config = {
+							show_path = "relative",
+						},
+					},
+					["dd"] = "delete",
+					["r"] = "rename",
+					["y"] = "copy_to_clipboard",
+					["x"] = "cut_to_clipboard",
+					["p"] = "paste_from_clipboard",
+					-- ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
+					["c"] = {
+						"copy",
+						config = {
+							show_path = "relative",
+						},
+					},
+					["m"] = {
+						"move",
+						config = {
+							show_path = "relative",
+						},
+					},
 				},
 			},
 		},
@@ -174,7 +175,6 @@ return function()
 			follow_current_file = {
 				enable = true,
 			},
-
 			group_empty_dirs = true, -- when true, empty folders will be grouped together
 			show_unloaded = true,
 			window = {
