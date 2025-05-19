@@ -60,12 +60,13 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
 			vim.lsp.config(lsp_name, opts)
-			return
+			vim.lsp.enable(lsp_name)
 		elseif type(custom_handler) == "function" then
 			--- Case where language server requires its own setup
 			--- Make sure to call require("lspconfig")[lsp_name].setup() in the function
 			--- See `clangd.lua` for example.
 			custom_handler(opts)
+			vim.lsp.enable(lsp_name)
 		elseif type(custom_handler) == "table" then
 			vim.lsp.config(
 				lsp_name,
@@ -76,6 +77,7 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 					custom_handler
 				)
 			)
+			vim.lsp.enable(lsp_name)
 		else
 			vim.notify(
 				string.format(
@@ -87,6 +89,7 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 				{ title = "nvim-lspconfig" }
 			)
 		end
+		return
 	end
 
 	for _, lsp in ipairs(lsp_deps) do
