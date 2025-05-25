@@ -7,6 +7,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+
 jobs:
   auto-merge-upstream:
     runs-on: ubuntu-latest
@@ -31,7 +32,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
 
           git remote add upstream https://github.com/ayamir/nvimdots.git
-          git fetch upstream 
+          git fetch upstream  ${{ matrix.branch }}
           remote_update=$(git merge upstream/${{ matrix.branch }} --allow-unrelated-histories --no-commit --no-ff)
           echo "remote_update=${remote_update}" >> "$GITHUB_OUTPUT"
 
@@ -55,7 +56,7 @@ jobs:
 
       - name: Run lockfile-autoupdate
         if: steps.check_lockfile.outputs.files_exists == 'true'
-        timeout-minutes: 15
+        timeout-minutes: 60
         continue-on-error: true
         run: |
           # obsidianのプラグインを強制的に読み込ませる
@@ -78,11 +79,11 @@ jobs:
           }
 
           # プラグインのアップデート
-          nvim --headless "+Lazy! update" +qa
+          time nvim --headless "+Lazy! update" +qa
           mergeUpstreamLock lazy-lock.json ${{ matrix.branch }}
 
           # mason管理のパッケージのアップデート
-          nvim --headless "+MasonToolsInstallSync" +qa || echo "Some mason tools installation fails"
+          time nvim --headless "+MasonToolsInstallSync" +qa || echo "Some mason tools installation fails"
           nvim --headless "+MasonLock" +qa
           cp -pv "${NVIMDIR}/mason-lock.json" mason-lock.json
 
@@ -90,7 +91,7 @@ jobs:
         if: steps.check_lockfile.outputs.files_exists == 'true' || contains(fromJSON('["success", "skipped"]'), steps.fix-conflict.outcome)
         with:
           branch: ${{ matrix.branch }}
-          file_pattern: "lazy-lock.json"
+          file_pattern: "lazy-lock.json mason-lock.json"
           commit_message: "chore: auto merge upstream and update lazy-lock.json"
           commit_user_name: "github-actions[bot]"
           commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
