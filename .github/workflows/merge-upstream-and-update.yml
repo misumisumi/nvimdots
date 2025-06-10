@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: [0.11, feat/ai-chat]
+        branch: [0.11]
     steps:
       - uses: actions/checkout@v4
         with:
