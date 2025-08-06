@@ -1,3 +1,3 @@
 return {
-	patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", ".*root" },
+	patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", ".*root", "pandoc.yaml" },
 }
