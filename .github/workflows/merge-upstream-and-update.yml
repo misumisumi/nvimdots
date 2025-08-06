@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: [0.11]
+        branch: [main]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,12 +33,13 @@ jobs:
 
           git remote add upstream https://github.com/ayamir/nvimdots.git
           git fetch upstream  ${{ matrix.branch }}
-          remote_update=$(git merge upstream/${{ matrix.branch }} --allow-unrelated-histories --no-commit --no-ff)
+          remote_update=$(git merge upstream/${{ matrix.branch }} --allow-unrelated-histories --no-commit --no-ff -Xtheirs)
           echo "remote_update=${remote_update}" >> "$GITHUB_OUTPUT"
 
       - name: Fix conflict
         id: fix-conflict
         if: steps.merge-upstream.outputs.remote_update != 'Already up to date.'
+        continue-on-error: true
         run: |
           git reset HEAD lazy-lock.json
           git checkout lazy-lock.json
@@ -54,9 +55,9 @@ jobs:
         with:
           deno-version: v2.x
 
-      - name: Run lockfile-autoupdate
+      - name: Update lockfiles
         if: steps.check_lockfile.outputs.files_exists == 'true'
-        timeout-minutes: 60
+        timeout-minutes: 10
         continue-on-error: true
         run: |
           # obsidianのプラグインを強制的に読み込ませる
@@ -66,6 +67,15 @@ jobs:
           cp -r ./lua "${NVIMDIR}/lua"
           cp init.lua "${NVIMDIR}/init.lua"
 
+          # プラグインのアップデート
+          nvim --headless "+Lazy! update" +qa
+          # mason管理のパッケージのアップデート
+          nvim --headless "+MasonToolsInstallSync" +qa
+
+      - name: Merge lockfiles
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        run: |
+          NVIMDIR="${HOME}/.config/nvim"
           # 対象のlockファイルについて、upstreamから持ってきてマージする
           mergeUpstreamLock () {
             target=$1
@@ -78,14 +88,8 @@ jobs:
             rm "${target%.*}.origin.${target##.*}" "${target%.*}.upstream.${target##.*}"
           }
 
-          # プラグインのアップデート
-          time nvim --headless "+Lazy! update" +qa
           mergeUpstreamLock lazy-lock.json ${{ matrix.branch }}
-
-          # mason管理のパッケージのアップデート
-          time nvim --headless "+MasonToolsInstallSync" +qa || echo "Some mason tools installation fails"
-          nvim --headless "+MasonLock" +qa
-          cp -pv "${NVIMDIR}/mason-lock.json" mason-lock.json
+          [ -f "${NVIMDIR}/mason-lock.json"  ] && cp -pv "${NVIMDIR}/mason-lock.json" mason-lock.json
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: steps.check_lockfile.outputs.files_exists == 'true' || contains(fromJSON('["success", "skipped"]'), steps.fix-conflict.outcome)
