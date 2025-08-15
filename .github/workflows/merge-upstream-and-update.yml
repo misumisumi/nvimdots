@@ -4,10 +4,6 @@ on:
   schedule:
     - cron: "0 17 * * 5" # runs weekly on Saturday at 02:00 (JST)
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   auto-merge-upstream:
     runs-on: ubuntu-latest
@@ -15,8 +11,15 @@ jobs:
       matrix:
         branch: [main]
     steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AGENT_OF_MERGE_UPSTREAM_ID }}
+          private_key: ${{ secrets.AGENT_OF_MERGE_UPSTREAM_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
         with:
+          token: ${{ steps.generate-token.outputs.token }}
           fetch-depth: 0
 
       - uses: andstor/file-existence-action@v3
@@ -57,7 +60,7 @@ jobs:
 
       - name: Update lockfiles
         if: steps.check_lockfile.outputs.files_exists == 'true'
-        timeout-minutes: 10
+        timeout-minutes: 8
         continue-on-error: true
         run: |
           # obsidianのプラグインを強制的に読み込ませる
@@ -97,6 +100,3 @@ jobs:
           branch: ${{ matrix.branch }}
           file_pattern: "lazy-lock.json mason-lock.json"
           commit_message: "chore: auto merge upstream and update lazy-lock.json"
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
-          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
