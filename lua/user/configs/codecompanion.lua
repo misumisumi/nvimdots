@@ -33,27 +33,29 @@ return {
 		},
 	},
 	adapters = {
-		copilot = function()
-			return require("codecompanion.adapters").extend("copilot", {
-				schema = {
-					model = {
-						default = "gpt-4o",
+		http = {
+			copilot = function()
+				return require("codecompanion.adapters").extend("copilot", {
+					schema = {
+						model = {
+							default = "gpt-4o",
+						},
 					},
-				},
-			})
-		end,
-		gemini = function()
-			return require("codecompanion.adapters").extend("gemini", {
-				env = {
-					api_key = "cmd:sops decrypt --extract '[\"gemini\"]' ~/.config/codecompanion/api-keys.yaml 2>/dev/null",
-				},
-				schema = {
-					model = {
-						-- default = "gemini-2.5-flash-preview-04-17",
-						default = "gemini-2.0-flash",
+				})
+			end,
+			gemini = function()
+				return require("codecompanion.adapters").extend("gemini", {
+					env = {
+						api_key = "cmd:sops decrypt --extract '[\"gemini\"]' ~/.config/codecompanion/api-keys.yaml 2>/dev/null",
 					},
-				},
-			})
-		end,
+					schema = {
+						model = {
+							-- default = "gemini-2.5-flash-preview-04-17",
+							default = "gemini-2.0-flash",
+						},
+					},
+				})
+			end,
+		},
 	},
 }
