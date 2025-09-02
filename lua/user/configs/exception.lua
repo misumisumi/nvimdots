@@ -1,7 +1,7 @@
 local M = {}
 
 M.is_nixos = function()
-	return vim.fn.filewritable("/etc/NIXOS")
+	return vim.fn.filereadable("/etc/NIXOS")
 end
 
 M.null_ls = function()
