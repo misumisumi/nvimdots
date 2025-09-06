@@ -1,5 +1,3 @@
-local exception = require("user.configs.exception")
-
 local settings = {}
 
 -- Example
