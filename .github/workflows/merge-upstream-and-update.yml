@@ -63,12 +63,14 @@ jobs:
         timeout-minutes: 8
         continue-on-error: true
         run: |
+          NVIMDIR="${HOME}/.config/nvim"
+          XDG_CACHE_HOME="${HOME}/.cache"
+          XDG_CONFIG_HOME="${HOME}/.config"
+          mkdir -p "${XDG_CACHE_HOME}/nvim" "${XDG_CONFIG_HOME}"
+          cp -r ../nvimdots "${NVIMDIR}"
+
           # obsidianのプラグインを強制的に読み込ませる
           mkdir -p "${HOME}/Documents/memopad"
-          NVIMDIR="${HOME}/.config/nvim"
-          mkdir -p "${NVIMDIR}"
-          cp -r ./lua "${NVIMDIR}/lua"
-          cp init.lua "${NVIMDIR}/init.lua"
 
           # プラグインのアップデート
           nvim --headless "+Lazy! update" +qa
