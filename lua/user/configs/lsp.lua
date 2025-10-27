@@ -1,4 +1,3 @@
-local nvim_lsp = require("lspconfig")
 require("completion.mason").setup()
 require("completion.mason-lspconfig").setup()
 
@@ -11,4 +10,4 @@ if not ok then
 	_opts = require("completion.servers.nixd")
 end
 local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-nvim_lsp.nixd.setup(final_opts)
+require("modules.utils").register_server("nixd", final_opts)
