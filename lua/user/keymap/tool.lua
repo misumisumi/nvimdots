@@ -14,11 +14,6 @@ return {
 		:with_noremap()
 		:with_silent()
 		:with_desc("filetree: Toggle"),
-	-- Plugin: open-browser
-	["n|<leader>bo"] = map_cmd("<Plug>(openbrowser-smart-search)")
-		:with_noremap()
-		:with_silent()
-		:with_desc("Openbrowser: Search"),
 	-- Plugin: skkeleton
 	["i|<C-Space>"] = map_cmd("<Plug>(skkeleton-toggle)"):with_silent(),
 	["c|<C-Space>"] = map_cmd("<Plug>(skkeleton-toggle)"):with_silent(),

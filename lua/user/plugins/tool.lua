@@ -15,11 +15,6 @@ tool["nvim-neo-tree/neo-tree.nvim"] = {
 	-- event = "BufReadPost",
 	config = require("user.configs.tool.neo-tree"),
 }
-tool["tyru/open-browser.vim"] = {
-	lazy = true,
-	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("user.configs.tool.open-browser"),
-}
 tool["vim-skk/skkeleton"] = {
 	lazy = true,
 	dependencies = {

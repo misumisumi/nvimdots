@@ -7,7 +7,7 @@ settings["lsp_deps"] = {
 	"bashls",
 	"jsonls",
 	"taplo",
-	"terraformls",
+	"tofu_ls",
 	"texlab",
 	"typos_lsp",
 }
