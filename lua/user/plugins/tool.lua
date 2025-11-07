@@ -1,4 +1,23 @@
 local tool = {}
+local settings = require("core.settings")
+local exception = require("user.configs.exception")
+
+if settings.use_chat then
+	tool["olimorris/codecompanion.nvim"] = {
+		dependencies = {
+			{
+				"ravitemer/mcphub.nvim",
+				dependencies = { "nvim-lua/plenary.nvim" },
+				build = function()
+					if not exception.is_nixos() then
+						return "npm install -g mcp-hub@latest"
+					end
+				end,
+				config = require("user.configs.tool.mcphub"),
+			},
+		},
+	}
+end
 
 tool["nvim-neo-tree/neo-tree.nvim"] = {
 	lazy = true,

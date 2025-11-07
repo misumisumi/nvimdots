@@ -37,7 +37,7 @@ return {
 				ft = "codecompanion",
 				pinned = true,
 				collapsed = false,
-				size = { width = 0.25 },
+				size = { width = 0.30 },
 				open = "CodeCompanionChat Toggle",
 			},
 		}

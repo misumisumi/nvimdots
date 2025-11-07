@@ -30,5 +30,20 @@ settings["format_timeout"] = 5000
 
 settings["use_copilot"] = true
 settings["use_chat"] = true
+settings["chat_models"] = function()
+	return {
+		"google/gemini-2.5-flash", -- default
+		"google/gemini-2.5-pro",
+		"copilot/gpt-4.1",
+		"copilot/gpt-5-codex",
+		"gemini/default",
+		-- free models
+		"moonshotai/kimi-k2:free",
+		"qwen/qwen3-coder:free",
+		"deepseek/deepseek-chat-v3-0324:free",
+		"deepseek/deepseek-r1:free",
+		"google/gemma-3-27b-it:free",
+	}
+end
 
 return settings
