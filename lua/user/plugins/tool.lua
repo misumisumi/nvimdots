@@ -19,6 +19,16 @@ if settings.use_chat then
 	}
 end
 
+tool["misumisumi/remote-nvim.nvim"] = {
+	lazy = true,
+	event = "VeryLazy",
+	branch = "feat/improve-remote-installation",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"MunifTanjim/nui.nvim",
+	},
+	config = require("user.configs.tool.remote-nvim"),
+}
 tool["nvim-neo-tree/neo-tree.nvim"] = {
 	lazy = true,
 	branch = "v3.x",
