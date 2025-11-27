@@ -43,6 +43,7 @@ return {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
+	["n|<leader>zi"] = map_cr("Telescope zoxide list"):with_noremap():with_silent():with_desc("tool: Zoxide list"),
 	-- Plugin: vim-fugitive
 	["n|g"] = "",
 	["n|gps"] = "",
