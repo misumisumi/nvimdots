@@ -18,10 +18,32 @@ settings["disabled_plugins"] = {
 	"dstein64/nvim-scrollview",
 }
 
-settings["treesitter_deps"] = {
-	"nix",
-	"terraform",
-}
+settings["treesitter_deps"] = function()
+	return {
+		"bash",
+		"c",
+		"cpp",
+		"css",
+		"go",
+		"gomod",
+		"html",
+		"javascript",
+		"json",
+		"jsonc",
+		"lua",
+		"make",
+		"markdown",
+		"markdown_inline",
+		"nix",
+		"python",
+		"rust",
+		"terraform",
+		"typescript",
+		"vimdoc",
+		"vue",
+		"yaml",
+	}
+end
 
 settings["format_on_save"] = true
 settings["format_notify"] = true
