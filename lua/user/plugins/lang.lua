@@ -2,7 +2,7 @@ local lang = {}
 
 lang["chrisbra/csv.vim"] = {
 	lazy = true,
-	ft = "csv",
+	event = "BufReadPre *.csv,*.tsv",
 	config = require("user.configs.lang.csv"),
 }
 lang["dhruvasagar/vim-table-mode"] = {
