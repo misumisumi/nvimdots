@@ -19,7 +19,7 @@ settings["disabled_plugins"] = {
 }
 
 settings["treesitter_deps"] = function()
-	return {
+	local langs = {
 		"bash",
 		"c",
 		"cpp",
@@ -43,6 +43,14 @@ settings["treesitter_deps"] = function()
 		"vue",
 		"yaml",
 	}
+
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = langs,
+		callback = function(args)
+			vim.treesitter.start(args.buf)
+		end,
+	})
+	return langs
 end
 
 settings["format_on_save"] = true
