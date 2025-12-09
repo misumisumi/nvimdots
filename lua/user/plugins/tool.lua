@@ -1,15 +1,17 @@
 local tool = {}
 local settings = require("core.settings")
-local exception = require("user.configs.exception")
 
 if settings.use_chat then
+	local enabled = vim.fn.filereadable(vim.fn.expand("~/.env"))
 	tool["olimorris/codecompanion.nvim"] = {
+		enabled = enabled,
 		dependencies = {
 			{
 				"ravitemer/mcphub.nvim",
+				enabled = enabled,
 				dependencies = { "nvim-lua/plenary.nvim" },
 				build = function()
-					if not exception.is_nixos() then
+					if vim.fn.executable("mcp-hub") == 0 then
 						return "npm install -g mcp-hub@latest"
 					end
 				end,
