@@ -6,6 +6,7 @@ return {
 	remote = {
 		install_nvim_policy = "relax", -- リモートにneovimがあればダウンロードしない
 		upload_config_policy = "relax", -- リモートに設定がなければグローバルにアップロード
+		launch_cmd_prefix = "export LOGIN=0; [ -f $HOME/.profile ] && source $HOME/.profile;",
 		search_binary_pathes = {
 			"$HOME/.local/bin",
 			"$HOME/.local/share/mise/installs/neovim",
