@@ -56,8 +56,10 @@ settings["chat_models"] = function()
 	return {
 		"google/gemini-2.5-flash", -- default
 		"google/gemini-2.5-pro",
-		"copilot/gpt-4.1",
-		"copilot/gpt-5-codex",
+		"google/gemini-3-pro",
+		"copilot/gpt-5-mini",
+		"copilot/gpt-5-codex-mini",
+		"copilot/gpt-5-codex-max",
 		"gemini/default",
 		-- free models
 		"moonshotai/kimi-k2:free",
