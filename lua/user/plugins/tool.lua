@@ -2,7 +2,7 @@ local tool = {}
 local settings = require("core.settings")
 
 if settings.use_chat then
-	local enabled = vim.fn.filereadable(vim.fn.expand("~/.env"))
+	local enabled = vim.fn.filereadable(vim.fn.expand("~/.env")) == 1
 	tool["olimorris/codecompanion.nvim"] = {
 		enabled = enabled,
 		dependencies = {
