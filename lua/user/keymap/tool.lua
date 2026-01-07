@@ -6,7 +6,15 @@ local map_callback = bind.map_callback
 return {
 	-- Remove default keymap
 	["n|<leader>nr"] = "",
-
+	-- Plugin: dapui
+	["n|<leader>dt"] = map_callback(function()
+			if _G._debugging ~= nil then
+				require("dapui").toggle()
+			end
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Toggle DAP UI"),
 	-- Plugin: Neotree with edgy
 	["n|<leader>e"] = map_callback(function()
 			require("edgy").toggle("left")
