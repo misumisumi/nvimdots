@@ -11,7 +11,7 @@ local fcitx5 = {
 	{ "FocusLost", "* :silent", "!fcitx5-remote -g SKK" },
 	{ "VimLeave", "* :silent", "!fcitx5-remote -g SKK" },
 }
-if require("core.global").is_linux then
+if require("core.global").is_linux and vim.fn.executable("fcitx5-remote") == 1 then
 	for k, v in pairs(fcitx5) do
 		definitions.bufs[k] = v
 	end
