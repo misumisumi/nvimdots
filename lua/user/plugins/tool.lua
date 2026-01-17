@@ -8,12 +8,11 @@ if settings.use_chat then
 		dependencies = {
 			{
 				"ravitemer/codecompanion-history.nvim",
-				commit = "eb99d256352144cf3b6a1c45608ec25544a0813d",
+				-- commit = "eb99d256352144cf3b6a1c45608ec25544a0813d",
 			},
 			{
 				"ravitemer/mcphub.nvim",
 				enabled = enabled,
-				tag = "v6.2.0",
 				dependencies = { "nvim-lua/plenary.nvim" },
 				build = function()
 					if vim.fn.executable("mcp-hub") == 0 then
