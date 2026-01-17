@@ -1,4 +1,4 @@
-local icons = require("utils.icons")
+local icons = { aichat = require("modules.utils.icons").get("aichat", true) }
 return {
 	opts = {
 		language = "Japanese",
@@ -18,6 +18,15 @@ return {
 					return icons.aichat.Copilot .. " CodeCompanion (" .. adapter.formatted_name .. ")"
 				end,
 				user = icons.aichat.Me .. " Me",
+			},
+			keymaps = {
+				submit = {
+					modes = { n = "<ESC>", i = "<M-q>" },
+					description = "Stop",
+					callback = function(chat)
+						chat:stop()
+					end,
+				},
 			},
 		},
 		inline = {
