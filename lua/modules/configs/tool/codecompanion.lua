@@ -79,12 +79,39 @@ return function()
 			},
 			chat = {
 				window = {
+					auto_scroll = true,
+					border = "single",
+					full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
 					layout = "vertical", -- float|vertical|horizontal|buffer
 					position = "right", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
-					border = "single",
-					width = 0.25,
 					relative = "editor",
-					full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
+					show_header_separator = true,
+					width = 0.25,
+				},
+			},
+		},
+		rules = {
+			default = {
+				description = "Collection of common files for all projects",
+				files = {
+					".clinerules",
+					".cursorrules",
+					".goosehints",
+					".rules",
+					".windsurfrules",
+					".github/copilot-instructions.md",
+					"AGENT.md",
+					"AGENTS.md",
+					{ path = "CLAUDE.md", parser = "claude" },
+					{ path = "CLAUDE.local.md", parser = "claude" },
+					{ path = "~/.claude/CLAUDE.md", parser = "claude" },
+				},
+				is_preset = true,
+			},
+			opts = {
+				chat = {
+					autoload = "default", -- The rule groups to load
+					enabled = true,
 				},
 			},
 		},
