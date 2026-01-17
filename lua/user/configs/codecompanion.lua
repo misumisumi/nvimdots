@@ -20,8 +20,8 @@ return {
 				user = icons.aichat.Me .. " Me",
 			},
 			keymaps = {
-				submit = {
-					modes = { n = "<ESC>", i = "<M-q>" },
+				stop = {
+					modes = { n = "<C-q>", i = "<C-q>" },
 					description = "Stop",
 					callback = function(chat)
 						chat:stop()
