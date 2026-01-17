@@ -1,10 +1,4 @@
-local icons = {
-	aichat = {
-		Copilot = "",
-		Me = "",
-	},
-}
-
+local icons = require("utils.icons")
 return {
 	opts = {
 		language = "Japanese",
@@ -14,33 +8,7 @@ return {
 			window = {
 				width = 0.35,
 			},
-			auto_scroll = true,
-			show_header_separator = true,
 		},
-		diff = function()
-			return {
-				enabled = true,
-				provider = "inline", -- mini_diff|split|inline
-				provider_opts = {
-					inline = {
-						layout = "float", -- float|buffer
-					},
-				},
-				split = {
-					close_chat_at = 240, -- Close an open chat buffer if the total columns of your display are less than...
-					layout = "vertical", -- vertical|horizontal split
-					opts = {
-						"internal",
-						"filler",
-						"closeoff",
-						"algorithm:histogram", -- https://adamj.eu/tech/2024/01/18/git-improve-diff-histogram/
-						"indent-heuristic", -- https://blog.k-nut.eu/better-git-diffs
-						"followwrap",
-						"linematch:120",
-					},
-				},
-			}
-		end,
 	},
 	strategies = {
 		chat = {
