@@ -43,6 +43,7 @@ return {
 					schema = {
 						model = {
 							default = "gpt-5.1-codex-mini",
+							-- default = "gpt-4.1",
 						},
 					},
 				})
