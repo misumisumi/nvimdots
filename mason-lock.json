@@ -3,7 +3,7 @@
   "clang-format": "21.1.8",
   "clangd": "21.1.8",
   "codelldb": "v1.12.1",
-  "debugpy": "1.8.19",
+  "debugpy": "1.8.20",
   "delve": "v1.26.0",
   "gofumpt": "v0.9.2",
   "goimports": "v0.41.0",
