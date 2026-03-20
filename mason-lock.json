@@ -1,7 +1,7 @@
 {
   "bash-language-server": "5.6.0",
   "clang-format": "22.1.1",
-  "clangd": "21.1.8",
+  "clangd": "22.1.0",
   "codelldb": "v1.12.1",
   "debugpy": "1.8.20",
   "delve": "v1.26.1",
@@ -12,7 +12,7 @@
   "json-lsp": "4.10.0",
   "lua-language-server": "3.17.1",
   "prettier": "3.8.1",
-  "ruff": "0.15.6",
+  "ruff": "0.15.7",
   "shfmt": "v3.13.0",
   "stylua": "v2.4.0",
   "taplo": "0.10.0",
@@ -20,5 +20,5 @@
   "tofu-ls": "v0.4.0",
   "typos-lsp": "v0.1.50",
   "vint": "0.3.21",
-  "zuban": "0.6.1"
+  "zuban": "0.6.2"
 }
