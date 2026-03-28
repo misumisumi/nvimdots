@@ -5,15 +5,20 @@ if settings.use_chat then
 	local enabled = vim.fn.filereadable(vim.fn.expand("~/.env")) == 1
 	tool["olimorris/codecompanion.nvim"] = {
 		enabled = enabled,
+		lazy = true,
+		event = "VeryLazy",
 		dependencies = {
 			{
 				"ravitemer/codecompanion-history.nvim",
+				enabled = enabled,
 				-- commit = "eb99d256352144cf3b6a1c45608ec25544a0813d",
 			},
 			{
 				"ravitemer/mcphub.nvim",
 				enabled = enabled,
-				dependencies = { "nvim-lua/plenary.nvim" },
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+				},
 				build = function()
 					if vim.fn.executable("mcp-hub") == 0 then
 						return "npm install -g mcp-hub@latest"
@@ -24,6 +29,12 @@ if settings.use_chat then
 		},
 	}
 end
+
+tool["polirritmico/lazy-local-patcher.nvim"] = {
+	lazy = true,
+	event = "VeryLazy",
+	config = require("user.configs.tool.lazy-local-patcher-nvim"),
+}
 
 tool["misumisumi/remote-nvim.nvim"] = {
 	lazy = true,
