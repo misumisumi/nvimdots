@@ -1,6 +1,7 @@
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_callback = bind.map_callback
+local helpers = require("keymap.helpers")
 
 return {
 	["n|<A-S-q>"] = "",
@@ -13,7 +14,11 @@ return {
 	["n|<C-p>"] = "",
 	["n|<C-S-q>"] = map_cr("q!"):with_desc("edit: Force quit"),
 	["n|<C-S-P>"] = map_callback(function()
-			_command_panel()
+			helpers.picker("keymaps", {
+				lhs_filter = function(lhs)
+					return not string.find(lhs, "Þ")
+				end,
+			})
 		end)
 		:with_noremap()
 		:with_silent()

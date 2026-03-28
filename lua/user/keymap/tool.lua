@@ -2,6 +2,7 @@ local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
+local helpers = require("keymap.helpers")
 
 return {
 	-- Remove default keymap
@@ -46,7 +47,11 @@ return {
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
 	["n|<leader><S-cr>"] = map_callback(function()
-			_command_panel()
+			helpers.picker("keymaps", {
+				lhs_filter = function(lhs)
+					return not string.find(lhs, "Þ")
+				end,
+			})
 		end)
 		:with_noremap()
 		:with_silent()
@@ -62,13 +67,13 @@ return {
 	["n|<leader>gps"] = map_cr("Git push"):with_noremap():with_silent():with_desc("Git Push"),
 	["n|<leader>gpl"] = map_cr("Git pull"):with_noremap():with_silent():with_desc("git: Pull"),
 	["n|<leader>gl"] = map_callback(function()
-			_toggle_lazygit()
+			helpers.toggle_lazygit()
 		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("git: Toggle lazygit"),
 	["t|<leader>gl"] = map_callback(function()
-			_toggle_lazygit()
+			helpers.toggle_lazygit()
 		end)
 		:with_noremap()
 		:with_silent()
