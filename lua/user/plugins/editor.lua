@@ -13,7 +13,6 @@ editor["ntpeters/vim-better-whitespace"] = {
 editor["kylechui/nvim-surround"] = {
 	lazy = true,
 	event = "InsertEnter",
-	config = require("user.configs.editor.nvim-surround"),
 }
 editor["danymat/neogen"] = {
 	lazy = true,
