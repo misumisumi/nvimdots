@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: [main]
+        branch:
+          - "main"
+          - "0.12"
     steps:
       - uses: tibdex/github-app-token@v2
         id: generate-token
@@ -22,6 +24,9 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           fetch-depth: 0
 
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+
       - uses: andstor/file-existence-action@v3
         id: check_lockfile
         with:
@@ -33,6 +38,7 @@ jobs:
         run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+          git config checkout.defaultRemote=origin
 
           git remote add upstream https://github.com/ayamir/nvimdots.git
           git fetch upstream  ${{ matrix.branch }}
