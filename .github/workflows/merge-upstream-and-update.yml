@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: [main]
+        branch: [main 0.12]
     steps:
       - uses: tibdex/github-app-token@v2
         id: generate-token
