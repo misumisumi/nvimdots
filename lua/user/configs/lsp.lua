@@ -1,13 +1,14 @@
-require("completion.mason").setup()
+require("completion.neoconf").setup()
 require("completion.mason-lspconfig").setup()
 
 local opts = {
-	capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+	capabilities = require("modules.utils").get_lsp_capabilities(),
 }
--- Setup lsps that are not supported by `mason.nvim` but supported by `nvim-lspconfig` here.
-local ok, _opts = pcall(require, "user.configs.lsp-servers.nixd")
-if not ok then
-	_opts = require("completion.servers.nixd")
+if vim.fn.executable("nixd") == 1 then
+	local ok, _opts = pcall(require, "user.configs.lsp-servers.nixd")
+	if not ok then
+		_opts = require("completion.servers.nixd")
+	end
+	local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
+	require("modules.utils").register_server("nixd", final_opts)
 end
-local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-require("modules.utils").register_server("nixd", final_opts)
