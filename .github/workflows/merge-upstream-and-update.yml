@@ -23,6 +23,10 @@ jobs:
         with:
           token: ${{ steps.generate-token.outputs.token }}
           fetch-depth: 0
+          ref: ${{ matrix.branch }}
+
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
 
       - name: Install tree-sitter CLI
         run: npm install -g tree-sitter-cli
@@ -38,7 +42,7 @@ jobs:
         run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git config checkout.defaultRemote=origin
+          git config --global checkout.defaultRemote=origin
 
           git remote add upstream https://github.com/ayamir/nvimdots.git
           git fetch upstream  ${{ matrix.branch }}
@@ -101,6 +105,8 @@ jobs:
 
           mergeUpstreamLock lazy-lock.json ${{ matrix.branch }}
           [ -f "${NVIMDIR}/mason-lock.json"  ] && cp -pv "${NVIMDIR}/mason-lock.json" mason-lock.json
+
+          git add lazy-lock.json mason-lock.json
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: steps.check_lockfile.outputs.files_exists == 'true' || contains(fromJSON('["success", "skipped"]'), steps.fix-conflict.outcome)
