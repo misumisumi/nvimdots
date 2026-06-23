@@ -51,7 +51,21 @@ settings["format_timeout"] = 5000
 
 settings["use_copilot"] = true
 settings["use_chat"] = true
-settings["ai_adapters"] = {}
+settings["codecompanion_adapter"] = "opencode_http"
+settings["ai_adapters"] = {
+	opencode_http = {
+		type = "openai-compatible",
+		name = "Opencode",
+		base_url = "https://opencode.ai/zen/go",
+		chat_url = "/v1/chat/completions",
+		api_key = "cmd:cat ~/.env | grep OPENCODE_API_KEY | cut -d'=' -f2",
+		default_model = "deepseek-v4-flash",
+		optional = {
+			-- Disable thinking for DeepSeek-compatible APIs if needed:
+			-- thinking = { type = "disabled" },
+		},
+	},
+}
 settings["edit_prediction_source"] = "copilot"
 
 return settings
