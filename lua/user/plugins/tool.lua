@@ -91,6 +91,7 @@ tool["epwalsh/obsidian.nvim"] = {
 	enabled = require("user.configs.tool.obsidian").enabled,
 	ft = { "markdown" },
 	cmd = {
+		"Obsidian",
 		"ObsidianNewFromTemplate",
 		"ObsidianCreate",
 		"ObsidianKensaku",
@@ -106,7 +107,12 @@ tool["epwalsh/obsidian.nvim"] = {
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"delphinus/obsidian-kensaku.nvim",
+		{
+			"delphinus/obsidian-kensaku.nvim",
+			dependencies = {
+				{ "delphinus/luamigemo", version = "*" },
+			},
+		},
 	},
 	init = require("user.configs.tool.obsidian").init,
 	config = require("user.configs.tool.obsidian").setup,

@@ -29,12 +29,6 @@ return {
 				},
 			},
 		},
-		inline = {
-			adapter = "copilot",
-		},
-		cmd = {
-			adapter = "copilot",
-		},
 	},
 	adapters = {
 		http = {
