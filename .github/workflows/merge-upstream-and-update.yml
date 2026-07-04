@@ -1,0 +1,116 @@
+name: auto merge upstream
+on:
+  workflow_dispatch: # allows manual triggering
+  schedule:
+    - cron: "0 17 * * 5" # runs weekly on Saturday at 02:00 (JST)
+
+jobs:
+  auto-merge-upstream:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch:
+          - "main"
+          - "0.13"
+    steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AGENT_OF_MERGE_UPSTREAM_ID }}
+          private_key: ${{ secrets.AGENT_OF_MERGE_UPSTREAM_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          fetch-depth: 0
+          ref: ${{ matrix.branch }}
+
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+
+      - uses: andstor/file-existence-action@v3
+        id: check_lockfile
+        with:
+          files: "lazy-lock.json"
+
+      - name: Merge upstream
+        id: merge-upstream
+        continue-on-error: true
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global checkout.defaultRemote=origin
+
+          git remote add upstream https://github.com/ayamir/nvimdots.git
+          git fetch upstream  ${{ matrix.branch }}
+          remote_update=$(git merge upstream/${{ matrix.branch }} --allow-unrelated-histories --no-commit --no-ff -Xtheirs)
+          echo "remote_update=${remote_update}" >> "$GITHUB_OUTPUT"
+
+      - name: Fix conflict
+        id: fix-conflict
+        if: steps.merge-upstream.outputs.remote_update != 'Already up to date.'
+        continue-on-error: true
+        run: |
+          git reset HEAD lazy-lock.json
+          git checkout lazy-lock.json
+          git commit --no-edit
+
+      - uses: rhysd/action-setup-vim@v1
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        with:
+          neovim: true
+
+      - uses: denoland/setup-deno@v2
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        with:
+          deno-version: v2.x
+
+      - name: Update lockfiles
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        timeout-minutes: 8
+        continue-on-error: true
+        run: |
+          NVIMDIR="${HOME}/.config/nvim"
+          XDG_CACHE_HOME="${HOME}/.cache"
+          XDG_CONFIG_HOME="${HOME}/.config"
+          mkdir -p "${XDG_CACHE_HOME}/nvim" "${XDG_CONFIG_HOME}"
+          cp -r ../nvimdots "${NVIMDIR}"
+
+          # obsidianのプラグインを強制的に読み込ませる
+          mkdir -p "${HOME}/Documents/memopad"
+
+          # プラグインのアップデート
+          nvim --headless "+Lazy! update" +qa
+          # mason管理のパッケージのアップデート
+          nvim --headless "+MasonToolsInstallSync" +qa
+
+      - name: Merge lockfiles
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        run: |
+          NVIMDIR="${HOME}/.config/nvim"
+          # 対象のlockファイルについて、upstreamから持ってきてマージする
+          mergeUpstreamLock () {
+            target=$1
+            branch=${2:-main}
+
+            cp "${target}" "${target%.*}.origin.${target##.*}"
+            curl -L "https://raw.githubusercontent.com/ayamir/nvimdots/${branch}/${target}" -o "${target%.*}.upstream.${target##.*}"
+            # デフォルトのプラグインについては、上流を尊重する
+            jq -s '.[0] * .[1]' "${target%.*}.origin.${target##.*}" "${target%.*}.upstream.${target##.*}" > "${target}"
+            rm "${target%.*}.origin.${target##.*}" "${target%.*}.upstream.${target##.*}"
+          }
+
+          mergeUpstreamLock lazy-lock.json ${{ matrix.branch }}
+          [ -f "${NVIMDIR}/mason-lock.json"  ] && cp -pv "${NVIMDIR}/mason-lock.json" mason-lock.json
+
+          git add lazy-lock.json mason-lock.json
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: steps.check_lockfile.outputs.files_exists == 'true' || contains(fromJSON('["success", "skipped"]'), steps.fix-conflict.outcome)
+        with:
+          branch: ${{ matrix.branch }}
+          file_pattern: "lazy-lock.json mason-lock.json"
+          commit_message: "chore: auto merge upstream and update lazy-lock.json"
