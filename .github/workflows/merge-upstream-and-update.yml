@@ -28,6 +28,9 @@ jobs:
       - name: Install tree-sitter CLI
         run: npm install -g tree-sitter-cli
 
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+
       - uses: andstor/file-existence-action@v3
         id: check_lockfile
         with:

@@ -12,7 +12,7 @@ return {
 	},
 	strategies = {
 		chat = {
-			adapter = "copilot",
+			-- adapter = "opencode_http",
 			roles = {
 				llm = function(adapter)
 					return icons.aichat.Copilot .. " CodeCompanion (" .. adapter.formatted_name .. ")"
@@ -28,12 +28,6 @@ return {
 					end,
 				},
 			},
-		},
-		inline = {
-			adapter = "copilot",
-		},
-		cmd = {
-			adapter = "copilot",
 		},
 	},
 	adapters = {
@@ -55,7 +49,7 @@ return {
 					},
 					schema = {
 						model = {
-							default = "gemini-3-flash",
+							default = "gemini-3.5-flash",
 						},
 					},
 				})
