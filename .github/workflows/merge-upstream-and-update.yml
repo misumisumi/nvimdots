@@ -11,7 +11,7 @@ jobs:
       matrix:
         branch:
           - "main"
-          - "0.12"
+          - "0.13"
     steps:
       - uses: tibdex/github-app-token@v2
         id: generate-token
