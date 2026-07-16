@@ -25,7 +25,7 @@ return {
 		:with_desc("filetree: Toggle"),
 	-- Plugin: skkeleton
 	["i|<C-Space>"] = map_cmd("<Plug>(skkeleton-toggle)"):with_silent(),
-	["c|<C-Space>"] = map_cmd("<Plug>(skkeleton-toggle)"):with_silent(),
+	["c|<C-j>"] = map_cmd("<Plug>(skkeleton-toggle)"):with_silent(),
 	-- Plugin: todo-comments
 	["n|<leader>tt"] = map_cr("TodoQuickFix"):with_noremap():with_silent():with_desc("tool: Toggle Todos in project"),
 	["n|<leader>ft"] = map_cr("TodoTelescope"):with_noremap():with_silent():with_desc("find: Todos in project"),
