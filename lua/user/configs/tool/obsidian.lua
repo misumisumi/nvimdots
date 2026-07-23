@@ -5,20 +5,7 @@ M.enabled = function()
 end
 
 M.setup = {
-	mappings = {
-		["<leader><leader>p"] = {
-			action = function()
-				return require("obsidian").img_paste.paste_img()
-			end,
-			opts = { buffer = true, desc = "obsidian: Paste image from system clipboard" },
-		},
-		["<leader>tch"] = {
-			action = function()
-				return require("obsidian").util.toggle_checkbox()
-			end,
-			opts = { buffer = true },
-		},
-	},
+	legacy_commands = false,
 	workspaces = {
 		{
 			name = "memopad",
@@ -67,9 +54,11 @@ M.setup = {
 						end,
 					},
 				},
-				disable_frontmatter = true,
+				frontmatter = {
+					enabled = true,
+				},
 				attachments = {
-					img_folder = "assets",
+					folder = "assets",
 				},
 				ui = {
 					enable = false,
@@ -79,65 +68,14 @@ M.setup = {
 					return tostring(os.time())
 				end,
 				callbacks = {
-					post_setup = function(client)
-						require("obsidian-kensaku")(client)
-						-- NOTE: https://github.com/epwalsh/obsidian.nvim/issues/467
-						vim.api.nvim_create_user_command("ObsidianCreate", function()
-							-- local client = require("obsidian").get_client()
-							local utils = require("obsidian.util")
-							-- prevent Obsidian.nvim from injecting it's own frontmatter table
-							client.opts.disable_frontmatter = true
-							-- prompt for note title
-							-- @see: borrowed from obsidian.command.new
-							local title = utils.input("Title: ")
-							if not title then
-								return
-							elseif title == "" then
-								title = nil
-							end
-							local picker = client:picker()
-							local note = client:create_note({ title = title, no_write = true })
-							local buf = 0
-							client:open_note(note, {
-								sync = true,
-								callback = function(bufnr)
-									buf = bufnr
-								end,
-							})
-							local insert_template = require("obsidian.templates").insert_template
-							local util = require("obsidian.util")
-							picker:find_templates({
-								callback = function(template)
-									-- HACK: It won't be written to the buffer unless you include an extra line.
-									vim.api.nvim_buf_set_lines(buf, 0, 0, false, { "", "# " .. note.title })
-									note = insert_template({
-										template_name = template,
-										client = client,
-										location = util.get_active_window_cursor_location(),
-									})
-									vim.api.nvim_buf_set_lines(buf, 0, 2, false, {})
-								end,
-							})
-						end, {})
-						vim.api.nvim_create_user_command("ObsidianSearchAsset", function()
-							local picker = client:picker()
-							local selection_mappings = picker:_note_selection_mappings()
-							function picker._build_find_cmd(self)
-								local search = require("obsidian.search")
-								local search_opts = search.SearchOpts.from_tbl({
-									sort_by = self.client.opts.sort_by,
-									sort_reversed = self.client.opts.sort_reversed,
-									include_non_markdown = true,
-									exclude = { "archetypes" },
-								})
-								return search.build_find_cmd(".", "/", search_opts)
-							end
-							picker:find_files({
-								prompt_title = "Assets",
-								dir = picker.client:vault_root():joinpath("assets"),
-								selection_mappings = selection_mappings,
-							})
-						end, {})
+					enter_note = function(note) -- luacheck: ignore
+						vim.keymap.set("n", "<leader>tch", "<cmd>Obsidian toggle_checkbox<cr>", {
+							buffer = true,
+							desc = "Toggle checkbox",
+						})
+					end,
+					post_setup = function()
+						require("obsidian-kensaku").setup({})
 					end,
 				},
 			},

@@ -85,26 +85,12 @@ tool["voldikss/vim-translator"] = {
 tool["lambdalisue/kensaku.vim"] = {
 	dependencies = { "vim-denops/denops.vim" },
 }
-tool["epwalsh/obsidian.nvim"] = {
+tool["obsidian-nvim/obsidian.nvim"] = {
 	version = "*",
 	lazy = true,
 	enabled = require("user.configs.tool.obsidian").enabled,
 	ft = { "markdown" },
-	cmd = {
-		"Obsidian",
-		"ObsidianNewFromTemplate",
-		"ObsidianCreate",
-		"ObsidianKensaku",
-		"ObsidianSearch",
-		"ObsidianTags",
-		"ObsidianDailies",
-		"ObsidianNew",
-		"ObsidianOpen",
-		"ObsidianToday",
-		"ObsidianTomorrow",
-		"ObsidianYesterday",
-		"ObsidianWeekly",
-	},
+	cmd = { "Obsidian" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{
