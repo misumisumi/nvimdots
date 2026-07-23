@@ -68,7 +68,7 @@ M.setup = {
 					return tostring(os.time())
 				end,
 				callbacks = {
-					enter_note = function(note)
+					enter_note = function(note) -- luacheck: ignore
 						vim.keymap.set("n", "<leader>tch", "<cmd>Obsidian toggle_checkbox<cr>", {
 							buffer = true,
 							desc = "Toggle checkbox",
