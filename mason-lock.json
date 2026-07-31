@@ -5,7 +5,7 @@
   "codelldb": "v1.12.2",
   "debugpy": "1.8.21",
   "delve": "v1.27.0",
-  "gofumpt": "v0.10.0",
+  "gofumpt": "v0.11.0",
   "goimports": "v0.48.0",
   "gopls": "v0.23.0",
   "html-lsp": "4.10.0",
@@ -13,12 +13,12 @@
   "lua-language-server": "3.18.2",
   "prettier": "3.9.6",
   "pyrefly": "1.1.1",
-  "ruff": "0.15.22",
+  "ruff": "0.16.0",
   "shfmt": "v3.13.1",
   "stylua": "v2.5.2",
   "taplo": "0.10.0",
   "texlab": "v5.26.0",
   "tofu-ls": "v0.5.3",
-  "typos-lsp": "v0.1.52",
+  "typos-lsp": "v0.1.54",
   "vint": "0.3.21"
 }
