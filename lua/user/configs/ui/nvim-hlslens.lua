@@ -1,5 +1,5 @@
 return function()
-	require("scrollbar.handlers.search").setup({
+	require("hlslens").setup({
 		auto_enable = true,
 		float_shadow_blend = 60,
 	})
