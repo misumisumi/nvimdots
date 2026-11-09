@@ -24,7 +24,7 @@ if settings.use_chat then
 						return "npm install -g mcp-hub@latest"
 					end
 				end,
-				config = require("user.configs.tool.mcphub"),
+				opts = require("user.configs.tool.mcphub"),
 			},
 		},
 	}
@@ -33,7 +33,7 @@ end
 tool["polirritmico/lazy-local-patcher.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
-	config = require("user.configs.tool.lazy-local-patcher-nvim"),
+	opts = require("user.configs.tool.lazy-local-patcher-nvim"),
 }
 
 tool["misumisumi/remote-nvim.nvim"] = {
@@ -44,7 +44,7 @@ tool["misumisumi/remote-nvim.nvim"] = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 	},
-	config = require("user.configs.tool.remote-nvim"),
+	opts = require("user.configs.tool.remote-nvim"),
 }
 tool["nvim-neo-tree/neo-tree.nvim"] = {
 	lazy = true,
@@ -101,7 +101,7 @@ tool["obsidian-nvim/obsidian.nvim"] = {
 		},
 	},
 	init = require("user.configs.tool.obsidian").init,
-	config = require("user.configs.tool.obsidian").setup,
+	opts = require("user.configs.tool.obsidian").setup,
 }
 tool["HakonHarnes/img-clip.nvim"] = {
 	lazy = true,
