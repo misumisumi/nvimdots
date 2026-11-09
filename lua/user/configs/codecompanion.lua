@@ -12,7 +12,8 @@ return {
 	},
 	strategies = {
 		chat = {
-			-- adapter = "opencode_http",
+			-- OpenCode over ACP (`opencode acp`)
+			adapter = "opencode",
 			roles = {
 				llm = function(adapter)
 					return icons.aichat.Copilot .. " CodeCompanion (" .. adapter.formatted_name .. ")"
@@ -56,6 +57,19 @@ return {
 			end,
 		},
 		acp = {
+			opencode = function()
+				return require("codecompanion.adapters").extend("opencode", {
+					-- OpenCode over ACP: `opencode acp`
+					-- Models/modes come from OpenCode's own config (~/.config/opencode).
+					-- Pin them here to force a choice inside CodeCompanion:
+					-- defaults = {
+					-- 	session_config_options = {
+					-- 		model = "deepseek-v4-flash",
+					-- 		mode = "build",
+					-- 	},
+					-- },
+				})
+			end,
 			gemini_cli = function()
 				return require("codecompanion.adapters").extend("gemini_cli", {
 					defaults = {
