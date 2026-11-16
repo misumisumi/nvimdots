@@ -1,15 +1,12 @@
 return function()
 	local function get_hl(name)
-		local rgb
-		rgb = vim.api.nvim_get_hl_by_name(name, true).foreground
-
+		local rgb = vim.api.nvim_get_hl(0, { name = name, link = false }).fg
 		return string.format("#%06x", rgb)
 	end
+
 	require("scrollbar").setup({
-		handle = {
-			color = get_hl("Comment"),
-			text = " ",
-			hide_if_all_visible = false,
+		providers = {
+			gitsigns = true,
 		},
 		marks = {
 			Cursor = { priority = 10 },
@@ -23,13 +20,18 @@ return function()
 			GitChange = { priority = 7 },
 			GitDelete = { priority = 7 },
 		},
-		excluded_filetypes = {
-			"prompt",
-			"TelescopePrompt",
-			"noice",
-			"neo-tree",
-			"neo-tree-popup",
+		exclude = {
+			filetypes = {
+				["neo-tree"] = true,
+				["neo-tree-popup"] = true,
+			},
+		},
+		scrollbar = {
+			thumb = {
+				text = " ",
+				hide_if_all_visible = false,
+				highlight = { bg = get_hl("Comment") },
+			},
 		},
 	})
-	require("scrollbar.handlers.gitsigns").setup()
 end
