@@ -3,6 +3,7 @@ return function()
 		local rgb = vim.api.nvim_get_hl(0, { name = name, link = false }).fg
 		return string.format("#%06x", rgb)
 	end
+    vim.g.scrollbar_v2_notice = false
 
 	require("scrollbar").setup({
 		providers = {

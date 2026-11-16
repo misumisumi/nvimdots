@@ -12,7 +12,6 @@ return {
 	},
 	strategies = {
 		chat = {
-			-- adapter = "opencode_http",
 			roles = {
 				llm = function(adapter)
 					return icons.aichat.Copilot .. " CodeCompanion (" .. adapter.formatted_name .. ")"
@@ -41,47 +40,43 @@ return {
 					},
 				})
 			end,
-			gemini = function()
-				return require("codecompanion.adapters").extend("gemini", {
+			litellm = function()
+				return require("codecompanion.adapters").extend("openai_compatible", {
 					env = {
-						-- api_key = "cmd:sops decrypt --extract '[\"gemini\"]' ~/.config/codecompanion/api-keys.yaml 2>/dev/null",
-						api_key = "cmd:cat ~/.env | grep GEMINI_API_KEY | cut -d'=' -f2",
+						url = "https://llm.misumi-sumi.com",
+						chat_url = "/v1/chat/completions",
+						api_key = "cmd:cat ~/.env | grep LITELLM_API_KEY | cut -d'=' -f2",
+						cf_client_id = "cmd:cat ~/.env | grep CF_ACCESS_CLIENT_ID | cut -d'=' -f2",
+						cf_client_secret = "cmd:cat ~/.env | grep CF_ACCESS_CLIENT_SECRET | cut -d'=' -f2",
+					},
+					headers = {
+						["CF-Access-Client-Id"] = "${cf_client_id}",
+						["CF-Access-Client-Secret"] = "${cf_client_secret}",
 					},
 					schema = {
 						model = {
-							default = "gemini-3.5-flash",
+							default = "auto",
 						},
 					},
 				})
 			end,
 		},
 		acp = {
-			gemini_cli = function()
-				return require("codecompanion.adapters").extend("gemini_cli", {
+			opencode = function()
+				return require("codecompanion.adapters").extend("opencode", {
 					defaults = {
-						auth_method = "gemini-api-key", -- "oauth-personal"|"gemini-api-key"|"vertex-ai"
-					},
-					env = {
-						GEMINI_API_KEY = "cmd:cat ~/.env | grep GEMINI_API_KEY | cut -d'=' -f2",
+						session_config_options = {
+							model = "litellm/auto",
+						},
 					},
 				})
 			end,
 		},
 	},
 	extensions = {
-		mcphub = {
-			callback = "mcphub.extensions.codecompanion",
+		history = {
 			opts = {
-				-- MCP Tools
-				make_tools = true, -- Make individual tools (@server__tool) and server groups (@server) from MCP servers
-				show_server_tools_in_chat = true, -- Show individual tools in chat completion (when make_tools=true)
-				add_mcp_prefix_to_tool_names = false, -- Add mcp__ prefix (e.g `@mcp__github`, `@mcp__neovim__list_issues`)
-				show_result_in_chat = true, -- Show tool results directly in chat buffer
-				format_tool = nil, -- function(tool_name:string, tool: CodeCompanion.Agent.Tool) : string Function to format tool names to show in the chat buffer
-				-- MCP Resources
-				make_vars = true, -- Convert MCP resources to #variables for prompts
-				-- MCP Prompts
-				make_slash_commands = true, -- Add MCP prompts as /slash commands
+				auto_generate_title = false,
 			},
 		},
 	},
