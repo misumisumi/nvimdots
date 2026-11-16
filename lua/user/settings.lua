@@ -69,4 +69,23 @@ settings["chat_models"] = function()
 	}
 end
 
+settings["ai_adapters"] = {
+	opencode_http = {
+		type = "openai-compatible",
+		name = "Opencode (HTTP)",
+		base_url = "https://opencode.ai/zen/go",
+		chat_url = "/v1/chat/completions",
+		models = {
+			"deepseek-v4-flash",
+			"deepseek-v4-pro",
+			"kimi-k2.6",
+			"mimo-v2.5-pro",
+			"glm-5.1",
+		},
+		default_model = "deepseek-v4-pro",
+	},
+}
+
+settings["codecompanion_adapter"] = "opencode_http"
+
 return settings
